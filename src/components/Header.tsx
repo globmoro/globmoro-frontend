@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
@@ -51,9 +52,20 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
         <Link
           href="/"
-          className="brand-mark text-xl tracking-[0.08em] text-ink md:text-2xl"
+          className="inline-flex items-center gap-2.5 text-ink"
+          aria-label={company.name}
         >
-          {company.name}
+          <Image
+            src="/brand/globmoro-emblem.png"
+            alt=""
+            width={44}
+            height={44}
+            className="h-9 w-9 object-contain md:h-11 md:w-11"
+            priority
+          />
+          <span className="brand-mark text-xl tracking-[0.08em] md:text-2xl">
+            {company.name}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 xl:flex" aria-label="Principale">

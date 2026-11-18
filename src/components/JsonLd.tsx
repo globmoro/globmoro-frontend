@@ -8,6 +8,8 @@ export function OrganizationJsonLd() {
     name: company.legalName,
     alternateName: company.name,
     url: company.siteUrl,
+    logo: `${company.siteUrl}/brand/globmoro-logo.png`,
+    image: `${company.siteUrl}/brand/globmoro-logo.png`,
     email: company.email,
     telephone: company.tel,
     sameAs: [company.instagramUrl],
