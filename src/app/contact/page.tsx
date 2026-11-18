@@ -80,10 +80,8 @@ export default function ContactPage() {
         <div className="border border-[var(--line)] bg-ink-soft/55 p-6 md:p-8">
           <h2 className="text-2xl">Formulaire</h2>
           <p className="mt-3 text-sm text-mist">
-            Envoyé vers l’API backend (
-            <code className="text-copper">NEXT_PUBLIC_API_URL</code>
-            /contact). Si l’API n’est pas configurée, utilisez WhatsApp ou le
-            téléphone — le site reste utilisable.
+            Décrivez votre besoin — nous vous rappelons rapidement. Pour une
+            réponse immédiate, préférez WhatsApp ou le téléphone.
           </p>
           <div className="mt-8">
             <ContactForm />
