@@ -74,7 +74,7 @@ export const trustPoints = [
     text: "Inspection libre. Pas de garantie constructeur incluse. SAV / entretien possibles selon termes convenus.",
   },
   {
-    title: "Société identifiée",
-    text: `${company.legalName} · ICE ${company.ice} · RC ${company.rc} · IF ${company.if}`,
+    title: "SARL à Agadir",
+    text: `${company.legalName} — siège et stock à ${company.city}. Identité légale (ICE / RC / IF) sur la page Entreprise.`,
   },
 ] as const;

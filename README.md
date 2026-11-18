@@ -8,7 +8,7 @@ Stack : **Next.js 15 (App Router) + TypeScript + Tailwind CSS v4**.
 
 | Route | Contenu |
 |---|---|
-| `/` | Accueil — hero marque, trust, stock, parcours, CTA |
+| `/` | Accueil — hero marque, stock, offre, parcours, contact |
 | `/stock` | Liste LINDE E20 + TOYOTA 7FBEST15 |
 | `/stock/linde-e20` | Fiche LINDE (specs, galerie, prix TTC) |
 | `/stock/toyota-7fbest15` | Fiche TOYOTA |
@@ -20,7 +20,7 @@ Stack : **Next.js 15 (App Router) + TypeScript + Tailwind CSS v4**.
 - Français (marché Maroc B2B).
 - Prix : **230 000 MAD TTC** (LINDE) / **150 000 MAD TTC** (TOYOTA).
 - Mentions : *vendu en l’état* / *inspection libre* — **pas de garantie**.
-- Trust : import Europe documenté, stock Agadir, identité SARL (ICE / RC / IF).
+- Trust accueil : import Europe documenté, stock Agadir, SARL — **ICE / RC / IF uniquement sur `/a-propos`**.
 - **Interdit** : coûts d’achat, floors confidentiels, avis fictifs, heures inventées, « parfait état ».
 
 Sources : Project store `docs/company-drive-brief.md` + `docs/owner-approved-facts.md`.

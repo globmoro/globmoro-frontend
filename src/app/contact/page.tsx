@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { TrustStrip } from "@/components/TrustStrip";
 import { company, mailUrl, telUrl, whatsappUrl } from "@/data/company";
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <div className="px-5 pb-8 pt-28 md:px-8 md:pt-32">
+      <div className="px-5 pb-8 pt-10 md:px-8 md:pt-14">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs uppercase tracking-[0.18em] text-copper">Contact</p>
           <h1 className="mt-4 max-w-3xl text-4xl md:text-5xl">
@@ -72,8 +73,12 @@ export default function ContactPage() {
             </li>
           </ul>
 
-          <p className="mt-10 text-sm text-steel">
-            ICE {company.ice} · RC {company.rc} · IF {company.if}
+          <p className="mt-10 text-sm text-mist-bright">
+            {company.legalName} · Agadir — identité légale (ICE / RC / IF) sur{" "}
+            <Link href="/a-propos" className="cta-underline text-paper">
+              la page Entreprise
+            </Link>
+            .
           </p>
         </div>
 

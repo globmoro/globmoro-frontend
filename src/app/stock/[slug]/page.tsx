@@ -34,7 +34,7 @@ export default async function MachinePage({ params }: Props) {
 
   return (
     <>
-      <div className="px-5 pt-28 md:px-8 md:pt-32">
+      <div className="px-5 pt-10 md:px-8 md:pt-14">
         <div className="mx-auto max-w-6xl">
           <Link
             href="/stock"
