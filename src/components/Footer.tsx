@@ -109,7 +109,10 @@ export function Footer() {
               Identité légale
             </Link>
           </p>
-          <p>Vendu en l’état · inspection libre · SAV sur devis · Prix sur demande</p>
+          <p>
+            Vente · location · option d’achat · vendu en l’état · conditions sur
+            devis
+          </p>
         </div>
       </div>
     </footer>

@@ -32,7 +32,7 @@ const figtree = localFont({
 });
 
 const description =
-  "GLOBMORO SARL — chariots élévateurs électriques d’occasion à Agadir. Stock LINDE E20 et TOYOTA 7FBEST15. Import Europe documenté, inspection sur site, vendu en l’état.";
+  "GLOBMORO SARL — chariots élévateurs électriques d’occasion à Agadir. Vente, location et location avec option d’achat. Stock LINDE E20 et TOYOTA 7FBEST15. Prix / conditions sur devis.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(company.siteUrl),
@@ -51,6 +51,8 @@ export const metadata: Metadata = {
     "GLOBMORO",
     "manutention Maroc",
     "chariot électrique occasion",
+    "location chariot élévateur Agadir",
+    "location avec option d’achat",
   ],
   authors: [{ name: company.legalName }],
   creator: company.legalName,

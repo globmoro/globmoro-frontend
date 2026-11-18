@@ -3,12 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { TrustStrip } from "@/components/TrustStrip";
 import { company, whatsappUrl } from "@/data/company";
-import { machines, saleDisclaimer } from "@/data/machines";
+import {
+  contactHref,
+  machineWhatsappPrefill,
+  machines,
+  saleDisclaimer,
+} from "@/data/machines";
 
 export const metadata: Metadata = {
   title: "Nos machines",
   description:
-    "Stock GLOBMORO Agadir — LINDE E20 PHL-02 2019 et TOYOTA 7FBEST15 2015. Prix sur demande. Vente en l’état, inspection libre.",
+    "Stock GLOBMORO Agadir — LINDE E20 PHL-02 2019 et TOYOTA 7FBEST15 2015. Prix sur demande. Vente, location ou location avec option d’achat — inspection libre.",
   alternates: { canonical: "/stock" },
 };
 
@@ -22,16 +27,20 @@ export default function StockPage() {
             Deux chariots électriques disponibles à Agadir
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist-bright md:text-lg">
-            Vente ferme B2B. {saleDisclaimer} Photos et specs ci-dessous ;
-            décision après visite sur site. Prix sur demande.
+            Achat, location ou location avec option d’achat. {saleDisclaimer}{" "}
+            Photos et specs ci-dessous ; décision après visite. Prix / conditions
+            sur devis.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/contact" className="btn-primary">
               Recevoir une offre
             </Link>
+            <Link href="/contact?offer=location" className="btn-ghost">
+              Demander une location
+            </Link>
             <a
               href={whatsappUrl(
-                "Bonjour GLOBMORO, je souhaite des infos sur le stock Agadir et recevoir une offre.",
+                "Bonjour GLOBMORO, je souhaite des infos sur le stock Agadir (achat, location ou option d’achat) — conditions sur devis.",
               )}
               target="_blank"
               rel="noopener noreferrer"
@@ -88,20 +97,37 @@ export default function StockPage() {
                 <p className="price-plate mt-6 inline-block w-fit text-xl">
                   {machine.priceLabel}
                 </p>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-steel-bright">
+                  Votre intérêt
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
                   <Link
-                    href={`/contact?machine=${machine.interestKey}`}
+                    href={contactHref(machine.interestKey, "achat")}
                     className="btn-primary text-sm"
                   >
-                    Recevoir une offre
+                    Achat
+                  </Link>
+                  <Link
+                    href={contactHref(machine.interestKey, "location")}
+                    className="btn-ghost text-sm"
+                  >
+                    Location
+                  </Link>
+                  <Link
+                    href={contactHref(machine.interestKey, "location-option")}
+                    className="btn-ghost text-sm"
+                  >
+                    Option d’achat
                   </Link>
                   <a
-                    href={whatsappUrl(machine.whatsappPrefill)}
+                    href={whatsappUrl(
+                      machineWhatsappPrefill(machine, "location"),
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-ghost text-sm"
                   >
-                    WhatsApp
+                    WhatsApp location
                   </a>
                   <Link
                     href={`/stock/${machine.slug}`}

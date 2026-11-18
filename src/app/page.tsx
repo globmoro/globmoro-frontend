@@ -3,13 +3,14 @@ import Link from "next/link";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { TrustStrip } from "@/components/TrustStrip";
 import {
+  commercialOffers,
   company,
   faqItems,
   services,
   trustPoints,
   whatsappUrl,
 } from "@/data/company";
-import { machines, saleDisclaimer } from "@/data/machines";
+import { contactHref, machines, saleDisclaimer } from "@/data/machines";
 
 export default function HomePage() {
   return (
@@ -37,15 +38,18 @@ export default function HomePage() {
             Chariots électriques d’occasion, prêts à inspecter à Agadir.
           </h1>
           <p className="animate-rise-delay-2 mt-5 max-w-lg text-base leading-relaxed text-[#d5dde4] md:text-lg">
-            Import Europe documenté · stock local · vendu en l’état · prix sur
-            demande.
+            Vente · location · option d’achat — import Europe documenté · stock
+            Agadir · prix / conditions sur devis.
           </p>
           <div className="animate-rise-delay-3 mt-9 flex flex-wrap gap-3">
             <Link href="/stock" className="btn-primary">
               Voir nos machines
             </Link>
-            <Link href="/contact" className="btn-ghost-on-dark btn-ghost">
-              Recevoir une offre
+            <Link
+              href="/contact?offer=location"
+              className="btn-ghost-on-dark btn-ghost"
+            >
+              Demander une location
             </Link>
           </div>
         </div>
@@ -105,6 +109,9 @@ export default function HomePage() {
                   <p className="price-plate mt-5 inline-block text-lg">
                     {machine.priceLabel}
                   </p>
+                  <p className="mt-3 text-xs uppercase tracking-[0.12em] text-[#9bb0bf]">
+                    Achat · Location · Option d’achat
+                  </p>
                 </div>
               </Link>
             ))}
@@ -119,13 +126,33 @@ export default function HomePage() {
         <div className="max-w-2xl">
           <p className="section-kicker">Nos services</p>
           <h2 id="services-heading" className="mt-4 text-3xl md:text-4xl">
-            Vente, import, accompagnement
+            Vente, location, option d’achat
           </h2>
           <p className="mt-5 text-base leading-relaxed text-mist-bright md:text-lg">
-            Offre B2B centrée sur le stock Agadir — sans promesses inventées.
+            Trois chemins B2B autour du stock Agadir — conditions sur devis,
+            sans loyers ni garanties inventés.
           </p>
         </div>
-        <ul className="mt-12 grid gap-0 border border-[var(--line)] sm:grid-cols-2 lg:grid-cols-3">
+
+        <ul className="mt-10 grid gap-0 border border-[var(--line)] md:grid-cols-3">
+          {commercialOffers.map((offer, index) => (
+            <li
+              key={offer.id}
+              className={`border-[var(--line)] bg-paper-pure/70 p-6 md:p-7 ${
+                index > 0
+                  ? "border-t md:border-t-0 md:border-l"
+                  : ""
+              }`}
+            >
+              <h3 className="text-xl text-ink">{offer.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-mist-bright">
+                {offer.text}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <ul className="mt-8 grid gap-0 border border-[var(--line)] sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <li
               key={service.slug}
@@ -144,12 +171,18 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap gap-5">
           <Link
             href="/services"
             className="cta-underline text-sm font-semibold uppercase tracking-[0.14em]"
           >
             Détail des services
+          </Link>
+          <Link
+            href="/contact?offer=location"
+            className="cta-underline text-sm font-semibold uppercase tracking-[0.14em]"
+          >
+            Demander une location
           </Link>
         </div>
       </section>
@@ -204,8 +237,8 @@ export default function HomePage() {
           {[
             {
               step: "01",
-              title: "Demandez une offre",
-              text: `Formulaire, WhatsApp ${company.whatsappDisplay} ou téléphone — ${company.contactName} répond pour GLOBMORO.`,
+              title: "Choisissez votre intérêt",
+              text: `Achat, location ou location avec option d’achat — formulaire, WhatsApp ${company.whatsappDisplay} ou téléphone. ${company.contactName} répond pour GLOBMORO.`,
             },
             {
               step: "02",
@@ -214,8 +247,8 @@ export default function HomePage() {
             },
             {
               step: "03",
-              title: "Achetez en l’état",
-              text: "Vente ferme B2B. Chargeur inclus. Livraison possible — coût à discuter selon destination.",
+              title: "Conditions sur devis",
+              text: "Vente en l’état, location ou option d’achat — termes à confirmer. Chargeur inclus. Livraison possible — coût à discuter.",
             },
           ].map((item, index) => (
             <li
@@ -303,24 +336,27 @@ export default function HomePage() {
           <div>
             <p className="section-kicker">Contact</p>
             <h2 id="contact-heading" className="mt-3 text-3xl md:text-4xl">
-              Recevoir une offre ou planifier une inspection
+              Offre, location ou inspection
             </h2>
             <p className="mt-5 text-base leading-relaxed text-mist-bright md:text-lg">
-              Écrivez sur WhatsApp, appelez, ou utilisez le formulaire devis.{" "}
-              {company.legalName} — stock et siège à {company.city}. Identité
-              légale sur{" "}
+              Écrivez sur WhatsApp, appelez, ou utilisez le formulaire devis
+              (achat / location / option d’achat). {company.legalName} — stock
+              et siège à {company.city}. Identité légale sur{" "}
               <Link href="/a-propos" className="cta-underline text-ink">
                 À propos
               </Link>
               .
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/contact" className="btn-primary">
+              <Link href={contactHref()} className="btn-primary">
                 Demander un devis
+              </Link>
+              <Link href="/contact?offer=location" className="btn-ghost">
+                Demander une location
               </Link>
               <a
                 href={whatsappUrl(
-                  "Bonjour GLOBMORO, je souhaite recevoir une offre pour vos chariots à Agadir.",
+                  "Bonjour GLOBMORO, je souhaite des infos (achat, location ou option d’achat) pour vos chariots à Agadir — conditions sur devis.",
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

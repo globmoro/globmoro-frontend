@@ -48,7 +48,8 @@ export const company = {
   contactName: "Salah Eddine Amentague",
   /** From Drive `informations clés` — company created 11/07/2025 */
   foundedLabel: "2025",
-  activity: "Manutention — vente de chariots élévateurs électriques d’occasion",
+  activity:
+    "Manutention — vente et location de chariots élévateurs électriques d’occasion",
   instagramUrl: "https://www.instagram.com/globmoro/",
   instagramHandle: "@globmoro",
 } as const;
@@ -63,7 +64,61 @@ export const telUrl = `tel:${company.tel}`;
 export const mailUrl = `mailto:${company.email}`;
 
 export const defaultWhatsappMessage =
-  "Bonjour GLOBMORO, je souhaite des informations sur vos chariots électriques à Agadir et recevoir une offre.";
+  "Bonjour GLOBMORO, je souhaite des informations sur vos chariots électriques à Agadir (achat, location ou location avec option d’achat) — conditions sur devis.";
+
+/** Commercial interest types — fold into inquiry message; no extra API field. */
+export const offerTypes = [
+  {
+    id: "achat",
+    label: "Achat",
+    shortLabel: "Achat",
+    cta: "Recevoir une offre",
+    messageLabel: "Achat (vente ferme)",
+  },
+  {
+    id: "location",
+    label: "Location",
+    shortLabel: "Location",
+    cta: "Demander une location",
+    messageLabel: "Location",
+  },
+  {
+    id: "location-option",
+    label: "Location avec option d’achat",
+    shortLabel: "Option d’achat",
+    cta: "Demander une option d’achat",
+    messageLabel: "Location avec option d’achat",
+  },
+] as const;
+
+export type OfferTypeId = (typeof offerTypes)[number]["id"];
+
+export function isOfferTypeId(value: string): value is OfferTypeId {
+  return offerTypes.some((offer) => offer.id === value);
+}
+
+export function getOfferType(id: OfferTypeId) {
+  return offerTypes.find((offer) => offer.id === id)!;
+}
+
+/** Morocco B2B paths — no invented monthly prices, deposits, or warranty claims. */
+export const commercialOffers = [
+  {
+    id: "achat" as const,
+    title: "Vente",
+    text: "Achat ferme B2B du stock Agadir. Prix sur demande. Vendu en l’état, inspection libre.",
+  },
+  {
+    id: "location" as const,
+    title: "Location",
+    text: "Location courte durée ou plus longue selon disponibilité — sur devis, conditions à confirmer.",
+  },
+  {
+    id: "location-option" as const,
+    title: "Location avec option d’achat",
+    text: "Location puis option d’achat après une période convenue (N mois) — sur devis, conditions à confirmer. Pas de grille légale inventée.",
+  },
+] as const;
 
 export const trustPoints = [
   {
@@ -84,7 +139,7 @@ export const trustPoints = [
   },
 ] as const;
 
-/** Services — honest scope only; no invented SLAs / warranties. */
+/** Services — honest scope only; no invented SLAs / warranties / rental rates. */
 export const services = [
   {
     slug: "vente",
@@ -94,17 +149,17 @@ export const services = [
   {
     slug: "location",
     title: "Location",
-    text: "Location possible selon disponibilité et termes convenus — demandez une offre (pas d’engagement standard affiché).",
+    text: "Location courte durée ou plus longue selon disponibilité du stock. Demandez une location — conditions et durée sur devis, à confirmer.",
+  },
+  {
+    slug: "location-option",
+    title: "Location avec option d’achat",
+    text: "Formule location puis option d’achat après une période convenue (N mois). Étudiée au cas par cas — sur devis, sans grille de loyers ni dépôt inventés.",
   },
   {
     slug: "import",
     title: "Import Europe",
-    text: "Import documenté depuis l’Europe (dossier fournisseur, série, équipements). Stock actuel issu de cet approvisionnement.",
-  },
-  {
-    slug: "sourcing",
-    title: "Sourcing",
-    text: "Recherche / sourcing de machines selon votre besoin — devis après cadrage. Pas de catalogue fictif.",
+    text: "Import documenté depuis l’Europe (dossier fournisseur, série, équipements). Sourcing possible selon besoin — devis après cadrage.",
   },
   {
     slug: "pieces",
@@ -128,12 +183,20 @@ export const faqItems = [
     a: "Non — vendues en l’état, sans garantie constructeur incluse. SAV / entretien possibles selon termes convenus.",
   },
   {
+    q: "Proposez-vous la location ?",
+    a: "Oui — location courte durée ou plus longue selon disponibilité. Conditions et durée sur devis, à confirmer. Utilisez « Demander une location » ou WhatsApp.",
+  },
+  {
+    q: "Qu’est-ce que la location avec option d’achat ?",
+    a: "Une location pendant une période convenue, puis une option d’achat étudiée au cas par cas. Détails (durée, conditions) uniquement sur devis — nous n’affichons pas de formule légale standard.",
+  },
+  {
     q: "Le chargeur est-il inclus ?",
     a: "Oui pour le stock actuel (LINDE et TOYOTA) — confirmé propriétaire.",
   },
   {
     q: "Comment obtenir le prix ?",
-    a: "Prix sur demande. Utilisez « Recevoir une offre », le formulaire devis, ou WhatsApp.",
+    a: "Prix sur demande pour la vente. Location et option d’achat : conditions sur devis. Formulaire, « Recevoir une offre » / « Demander une location », ou WhatsApp.",
   },
   {
     q: "Livraison possible ?",
