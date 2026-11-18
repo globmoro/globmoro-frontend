@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree, Syne } from "next/font/google";
+import localFont from "next/font/local";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { OrganizationJsonLd } from "@/components/JsonLd";
@@ -7,16 +7,28 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { company } from "@/data/company";
 import "./globals.css";
 
-const syne = Syne({
+/** Self-hosted — no Google Fonts network fetch during `next build` (Docker/EasyPanel). */
+const syne = localFont({
+  src: "../fonts/Syne-Variable.ttf",
   variable: "--font-syne",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: "500 800",
+  display: "swap",
 });
 
-const figtree = Figtree({
+const figtree = localFont({
+  src: [
+    {
+      path: "../fonts/Figtree-Variable.ttf",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Figtree-Italic-Variable.ttf",
+      style: "italic",
+    },
+  ],
   variable: "--font-figtree",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400 700",
+  display: "swap",
 });
 
 const description =

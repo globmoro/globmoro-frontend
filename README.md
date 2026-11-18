@@ -71,7 +71,9 @@ Voir `.env.example`.
 8. **Env** : coller les variables du tableau ci-dessus (au minimum `NEXT_PUBLIC_SITE_URL` + `NEXT_PUBLIC_API_URL` vers le backend `globmoro-backend-`)  
 9. Déployer / rebuild après merge sur `main`
 
-Dockerfile multi-stage inclus à la racine pour un déploiement containerisé sans Nixpacks.
+Dockerfile multi-stage inclus à la racine pour un déploiement containerisé sans Nixpacks. Les `NEXT_PUBLIC_*` sont acceptés en **build-args** / `ENV` dans le stage `builder`.
+
+Fonts (Syne display + Figtree body) are **self-hosted** under `src/fonts/` via `next/font/local` — no Google Fonts network fetch at build time (required for EasyPanel/Docker).
 
 ## SEO & dossiers repo
 
@@ -80,6 +82,7 @@ Dockerfile multi-stage inclus à la racine pour un déploiement containerisé sa
 - Métadonnées Open Graph / Twitter + JSON-LD Organization / Product
 - Favicon SVG (`src/app/icon.svg`)
 - Photos machines dans `public/forklifts/`
+- Fonts OFL : `src/fonts/` (Syne + Figtree variable)
 - `.dockerignore`, `.gitignore`, `.env.example`
 
 ## Scripts
