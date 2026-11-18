@@ -1,6 +1,9 @@
 /** Specs from Richter invoice + owner-approved facts + sales sheets. Cite-or-silence.
  * Public site: no selling prices — "Prix sur demande" only.
+ * Rental / rent-to-own: sur devis only — no invented rates, deposits, or warranties.
  */
+
+import type { OfferTypeId } from "@/data/company";
 
 export type MachinePhoto = {
   src: string;
@@ -38,6 +41,32 @@ export type Machine = {
   metaDescription: string;
   whatsappPrefill: string;
 };
+
+export function machineWhatsappPrefill(
+  machine: Machine,
+  offer: OfferTypeId = "achat",
+): string {
+  const label = `${machine.brand} ${machine.model}`;
+  switch (offer) {
+    case "location":
+      return `Bonjour GLOBMORO, je souhaite une location (courte durée ou plus longue) pour le ${label} à Agadir (El Wifaq). Conditions et durée sur devis — pouvez-vous me rappeler ?`;
+    case "location-option":
+      return `Bonjour GLOBMORO, je m’intéresse à une location avec option d’achat pour le ${label} à Agadir (El Wifaq). Période et conditions à confirmer sur devis — pouvez-vous m’envoyer une proposition ?`;
+    default:
+      return machine.whatsappPrefill;
+  }
+}
+
+export function contactHref(
+  machineInterest: Machine["interestKey"] | "" = "",
+  offer: OfferTypeId = "achat",
+): string {
+  const params = new URLSearchParams();
+  if (machineInterest) params.set("machine", machineInterest);
+  if (offer !== "achat") params.set("offer", offer);
+  const query = params.toString();
+  return query ? `/contact?${query}` : "/contact";
+}
 
 export const machines: Machine[] = [
   {
@@ -84,9 +113,9 @@ export const machines: Machine[] = [
     shortPitch:
       "Électrique 2 t · mât triplex 4 625 mm · batterie 930 Ah · chargeur inclus · stock Agadir.",
     metaDescription:
-      "LINDE E20 PHL-02 2019, 2000 kg, 3 807 h, triplex 4625 mm, chargeur inclus. Prix sur demande. Stock GLOBMORO Agadir — vendu en l’état, inspection libre.",
+      "LINDE E20 PHL-02 2019, 2000 kg, 3 807 h, triplex 4625 mm, chargeur inclus. Prix sur demande. Vente, location ou location avec option d’achat — stock GLOBMORO Agadir.",
     whatsappPrefill:
-      "Bonjour GLOBMORO, je suis intéressé par le LINDE E20 électrique 2T (2019) à Agadir (El Wifaq) — mât triplex 4625 mm, 3 807 h, batterie + chargeur inclus. Pouvez-vous m’envoyer une offre et les modalités d’inspection ?",
+      "Bonjour GLOBMORO, je suis intéressé par l’achat du LINDE E20 électrique 2T (2019) à Agadir (El Wifaq) — mât triplex 4625 mm, 3 807 h, batterie + chargeur inclus. Pouvez-vous m’envoyer une offre et les modalités d’inspection ?",
   },
   {
     slug: "toyota-7fbest15",
@@ -131,9 +160,9 @@ export const machines: Machine[] = [
     shortPitch:
       "Électrique 1,5 t · mât duplex 3 010 mm · ~1 300 h · chargeur inclus · stock Agadir.",
     metaDescription:
-      "TOYOTA 7FBEST15 2015, 1500 kg, ~1 300 h, duplex 3010 mm, chargeur inclus. Prix sur demande. Stock GLOBMORO Agadir — vendu en l’état, inspection libre.",
+      "TOYOTA 7FBEST15 2015, 1500 kg, ~1 300 h, duplex 3010 mm, chargeur inclus. Prix sur demande. Vente, location ou location avec option d’achat — stock GLOBMORO Agadir.",
     whatsappPrefill:
-      "Bonjour GLOBMORO, je suis intéressé par le TOYOTA 7FBEST15 électrique 1,5T (2015) à Agadir (El Wifaq) — positionneur + sideshift, ~1 300 h, batterie + chargeur inclus. Pouvez-vous m’envoyer une offre et les modalités d’inspection ?",
+      "Bonjour GLOBMORO, je suis intéressé par l’achat du TOYOTA 7FBEST15 électrique 1,5T (2015) à Agadir (El Wifaq) — positionneur + sideshift, ~1 300 h, batterie + chargeur inclus. Pouvez-vous m’envoyer une offre et les modalités d’inspection ?",
   },
 ];
 
@@ -145,10 +174,11 @@ export const saleDisclaimer =
   "Vendu en l’état · inspection libre sur site à Agadir · pas de garantie constructeur incluse.";
 
 export const saleTerms = [
-  "Vente ferme B2B — prioritaire.",
+  "Vente ferme B2B — prix sur demande.",
+  "Location (courte ou plus longue) et location avec option d’achat : sur devis, conditions à confirmer.",
   "Vendu en l’état · inspection libre à Agadir (El Wifaq / Bensergao).",
   "Chargeur inclus pour chaque machine du stock actuel.",
   "Livraison possible — coût à discuter selon destination.",
   "SAV / entretien possible selon termes convenus (pas de garantie gratuite incluse).",
-  "Paiement : conditions de marché standards.",
+  "Aucun loyer, dépôt ou garantie inventés affichés sur le site.",
 ] as const;

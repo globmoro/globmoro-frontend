@@ -1,6 +1,12 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import {
+  OfferTypeId,
+  getOfferType,
+  isOfferTypeId,
+  offerTypes,
+} from "@/data/company";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -21,11 +27,16 @@ function mapMachineInterest(value: string): MachineInterest {
 
 export function ContactForm({
   defaultMachine = "",
+  defaultOffer = "achat",
 }: {
   defaultMachine?: string;
+  defaultOffer?: OfferTypeId;
 }) {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const [offer, setOffer] = useState<OfferTypeId>(
+    isOfferTypeId(defaultOffer) ? defaultOffer : "achat",
+  );
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,6 +49,8 @@ export function ContactForm({
     const email = String(data.get("email") || "").trim();
     const city = String(data.get("city") || "").trim();
     const machine = String(data.get("machine") || "").trim();
+    const offerRaw = String(data.get("offer") || offer).trim();
+    const offerId: OfferTypeId = isOfferTypeId(offerRaw) ? offerRaw : "achat";
     const userMessage = String(data.get("message") || "").trim();
 
     if (!name || !companyName || !phone || !userMessage) {
@@ -64,7 +77,11 @@ export function ContactForm({
       return;
     }
 
+    const offerLabel = getOfferType(offerId).messageLabel;
+
+    // Keep payload API-compatible: fold rental intent into message (+ machineInterest).
     const composedMessage = [
+      `Type d’intérêt : ${offerLabel}`,
       city ? `Ville : ${city}` : null,
       userMessage,
     ]
@@ -97,6 +114,7 @@ export function ContactForm({
       setStatus("success");
       setMessage("Demande envoyée. Nous vous répondrons rapidement.");
       form.reset();
+      setOffer("achat");
     } catch {
       setStatus("error");
       setMessage(
@@ -168,12 +186,46 @@ export function ContactForm({
         </label>
       </div>
 
+      <fieldset>
+        <legend className="mb-2 block text-sm text-mist-bright">
+          Type d’intérêt *
+        </legend>
+        <div className="grid gap-2 sm:grid-cols-3">
+          {offerTypes.map((item) => {
+            const active = offer === item.id;
+            return (
+              <label
+                key={item.id}
+                className={`flex cursor-pointer items-start gap-2 border px-3 py-3 text-sm transition ${
+                  active
+                    ? "border-accent bg-accent-soft text-ink"
+                    : "border-[var(--line-strong)] bg-paper-pure text-mist-bright"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="offer"
+                  value={item.id}
+                  checked={active}
+                  onChange={() => setOffer(item.id)}
+                  className="mt-1"
+                />
+                <span className="leading-snug">{item.label}</span>
+              </label>
+            );
+          })}
+        </div>
+        <p className="mt-2 text-xs text-mist">
+          Location / option d’achat : conditions sur devis, à confirmer.
+        </p>
+      </fieldset>
+
       <label className="block text-sm">
         <span className="mb-2 block text-mist-bright">Message *</span>
         <textarea
           className="field min-h-32"
           name="message"
-          placeholder="Ex. : je souhaite recevoir une offre et planifier une inspection à Agadir…"
+          placeholder="Ex. : durée souhaitée, site d’utilisation, ou demande d’inspection à Agadir…"
           required
         />
       </label>
@@ -183,7 +235,7 @@ export function ContactForm({
         className="btn-primary w-full md:w-auto"
         disabled={status === "loading"}
       >
-        {status === "loading" ? "Envoi…" : "Recevoir une offre"}
+        {status === "loading" ? "Envoi…" : getOfferType(offer).cta}
       </button>
 
       {message ? (

@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { MachineGallery } from "@/components/MachineGallery";
+import { MachineInterestCtas } from "@/components/MachineInterestCtas";
 import { ProductJsonLd } from "@/components/JsonLd";
-import { company, whatsappUrl } from "@/data/company";
+import { company } from "@/data/company";
 import { Machine, saleDisclaimer, saleTerms } from "@/data/machines";
 
 export function MachineDetail({ machine }: { machine: Machine }) {
@@ -22,7 +22,10 @@ export function MachineDetail({ machine }: { machine: Machine }) {
           <p className="price-plate mt-6 inline-block text-2xl tracking-tight">
             {machine.priceLabel}
           </p>
-          <p className="mt-3 text-sm text-mist">{saleDisclaimer}</p>
+          <p className="mt-3 text-sm text-mist">
+            {saleDisclaimer} Achat, location ou location avec option d’achat —
+            conditions sur devis.
+          </p>
 
           <dl className="mt-8 grid grid-cols-2 gap-4 text-sm">
             <div>
@@ -55,24 +58,12 @@ export function MachineDetail({ machine }: { machine: Machine }) {
             </div>
           </dl>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href={`/contact?machine=${machine.interestKey}`}
-              className="btn-primary"
-            >
-              Recevoir une offre
-            </Link>
-            <a
-              href={whatsappUrl(machine.whatsappPrefill)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost"
-            >
-              WhatsApp
-            </a>
-            <a href={`tel:${company.tel}`} className="btn-ghost">
-              Appeler
-            </a>
+          <div className="mt-8">
+            <MachineInterestCtas
+              machine={machine}
+              showTel
+              tel={company.tel}
+            />
           </div>
         </div>
       </div>
@@ -127,7 +118,7 @@ export function MachineDetail({ machine }: { machine: Machine }) {
       </section>
 
       <section className="mt-14 border border-[var(--line)] bg-paper-pure px-6 py-8 md:px-8">
-        <h2 className="text-xl text-ink">Conditions de vente</h2>
+        <h2 className="text-xl text-ink">Conditions commerciales</h2>
         <ul className="mt-4 space-y-2 text-sm leading-relaxed text-mist-bright">
           {saleTerms.map((term) => (
             <li key={term}>{term}</li>

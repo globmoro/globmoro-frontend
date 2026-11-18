@@ -36,6 +36,7 @@
   --color-surface: var(--surface);
   --color-accent: var(--accent);
   --color-accent-bright: var(--accent-bright);
+  --color-accent-soft: var(--accent-soft);
   --color-steel: var(--steel);
   --color-steel-bright: var(--steel-bright);
   --font-display: var(--font-syne);

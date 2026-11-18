@@ -20,8 +20,9 @@ export default function AboutPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist-bright md:text-lg">
             Société marocaine basée à {company.city} ({company.region}). Nous
-            commercialisons des chariots élévateurs électriques d’occasion,
-            avec un stock physique inspectable sur site. Prix sur demande.
+            proposons vente, location et location avec option d’achat de
+            chariots électriques d’occasion, avec un stock physique
+            inspectable sur site — conditions sur devis. Prix sur demande.
           </p>
         </div>
       </div>
@@ -38,9 +39,10 @@ export default function AboutPage() {
                 enregistrée au Maroc. Siège / stock : {company.address}.
               </p>
               <p>
-                Notre posture commerciale est simple : vendre des machines
-                documentées, laisser l’acheteur inspecter librement, et ne
-                rien inventer sur l’état, les heures ou une garantie.
+                Notre posture commerciale : vente, location et location avec
+                option d’achat sur devis ; machines documentées ; inspection
+                libre ; rien d’inventé sur l’état, les heures, les loyers ou
+                une garantie.
               </p>
               <p>
                 Interlocuteur : {company.contactName}. Canaux directs —

@@ -2,16 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { TrustStrip } from "@/components/TrustStrip";
-import { company, mailUrl, telUrl, whatsappUrl } from "@/data/company";
+import {
+  OfferTypeId,
+  company,
+  isOfferTypeId,
+  mailUrl,
+  telUrl,
+  whatsappUrl,
+} from "@/data/company";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contactez ${company.legalName} à Agadir — WhatsApp ${company.whatsappDisplay}, tél ${company.telDisplay}, ${company.email}. Demander un devis chariots élévateurs.`,
+  description: `Contactez ${company.legalName} à Agadir — WhatsApp ${company.whatsappDisplay}, tél ${company.telDisplay}, ${company.email}. Devis achat, location ou option d’achat.`,
   alternates: { canonical: "/contact" },
 };
 
 type Props = {
-  searchParams: Promise<{ machine?: string }>;
+  searchParams: Promise<{ machine?: string; offer?: string }>;
 };
 
 export default async function ContactPage({ searchParams }: Props) {
@@ -19,6 +26,9 @@ export default async function ContactPage({ searchParams }: Props) {
   const machineParam = params.machine ?? "";
   const allowed = new Set(["linde", "toyota", "both", "other"]);
   const defaultMachine = allowed.has(machineParam) ? machineParam : "";
+  const defaultOffer: OfferTypeId = isOfferTypeId(params.offer ?? "")
+    ? (params.offer as OfferTypeId)
+    : "achat";
 
   return (
     <>
@@ -26,12 +36,12 @@ export default async function ContactPage({ searchParams }: Props) {
         <div className="mx-auto max-w-6xl">
           <p className="section-kicker">Contact</p>
           <h1 className="mt-4 max-w-3xl text-4xl md:text-5xl">
-            Demander un devis — réponse directe
+            Demander un devis — achat, location ou option d’achat
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist-bright md:text-lg">
-            Pour une offre ou une visite d’inspection à Agadir, contactez{" "}
-            {company.contactName} ({company.legalName}). WhatsApp est le canal
-            le plus rapide.
+            Pour une offre, une location ou une visite d’inspection à Agadir,
+            contactez {company.contactName} ({company.legalName}). WhatsApp est
+            le canal le plus rapide. Conditions sur devis.
           </p>
         </div>
       </div>
@@ -47,7 +57,11 @@ export default async function ContactPage({ searchParams }: Props) {
               </p>
               <a
                 href={whatsappUrl(
-                  "Bonjour GLOBMORO, je souhaite recevoir une offre et planifier une inspection.",
+                  defaultOffer === "location"
+                    ? "Bonjour GLOBMORO, je souhaite demander une location (courte ou plus longue) à Agadir — conditions sur devis."
+                    : defaultOffer === "location-option"
+                      ? "Bonjour GLOBMORO, je m’intéresse à une location avec option d’achat à Agadir — conditions après une période convenue, sur devis."
+                      : "Bonjour GLOBMORO, je souhaite recevoir une offre et planifier une inspection.",
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -56,7 +70,8 @@ export default async function ContactPage({ searchParams }: Props) {
                 {company.whatsappDisplay}
               </a>
               <p className="mt-2 text-sm text-mist-bright">
-                Message pré-rempli disponible — réponse par {company.contactName}.
+                Prefill adapté à votre intérêt — réponse par{" "}
+                {company.contactName}.
               </p>
             </li>
             <li>
@@ -104,11 +119,15 @@ export default async function ContactPage({ searchParams }: Props) {
         <div className="border border-[var(--line)] bg-paper-pure p-6 md:p-8">
           <h2 className="text-2xl text-ink">Formulaire devis</h2>
           <p className="mt-3 text-sm text-mist-bright">
-            Nom, société, téléphone, e-mail, ville, machine et message. Pour une
-            réponse immédiate, préférez WhatsApp.
+            Indiquez achat, location ou location avec option d’achat. L’intérêt
+            est transmis dans le message (API inchangée). Pour une réponse
+            immédiate, préférez WhatsApp.
           </p>
           <div className="mt-8">
-            <ContactForm defaultMachine={defaultMachine} />
+            <ContactForm
+              defaultMachine={defaultMachine}
+              defaultOffer={defaultOffer}
+            />
           </div>
         </div>
       </div>

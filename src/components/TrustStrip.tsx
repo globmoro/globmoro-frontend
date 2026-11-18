@@ -1,7 +1,7 @@
 const items = [
   "Import Europe documenté",
   "Stock Agadir — inspection sur site",
-  "Vendu en l’état",
+  "Vente · Location · Option d’achat",
   "GLOBMORO SARL · Agadir",
 ] as const;
 
