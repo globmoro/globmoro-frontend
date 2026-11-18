@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <div className="px-5 pb-8 pt-28 md:px-8 md:pt-32">
+      <div className="px-5 pb-8 pt-10 md:px-8 md:pt-14">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs uppercase tracking-[0.18em] text-copper">
             Entreprise
@@ -52,8 +52,11 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <aside className="border border-[var(--line)] bg-ink-soft/60 p-6 md:p-8">
-            <p className="text-xs uppercase tracking-[0.16em] text-steel">
+          <aside
+            id="identite-legale"
+            className="border border-[var(--line)] bg-ink-soft/60 p-6 md:p-8"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-steel-bright">
               Identité légale
             </p>
             <dl className="mt-6 space-y-4 text-sm">
@@ -66,7 +69,7 @@ export default function AboutPage() {
                 ["Contact", company.contactName],
               ].map(([label, value]) => (
                 <div key={label} className="border-b border-[var(--line)] pb-3">
-                  <dt className="text-xs uppercase tracking-[0.12em] text-steel">
+                  <dt className="text-xs uppercase tracking-[0.12em] text-steel-bright">
                     {label}
                   </dt>
                   <dd className="mt-1 text-paper">{value}</dd>

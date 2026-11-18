@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function StockPage() {
   return (
     <>
-      <div className="px-5 pb-8 pt-28 md:px-8 md:pt-32">
+      <div className="px-5 pb-8 pt-10 md:px-8 md:pt-14">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs uppercase tracking-[0.18em] text-copper">Stock</p>
           <h1 className="mt-4 max-w-3xl text-4xl md:text-5xl">

@@ -87,7 +87,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b1218",
+  themeColor: "#060a0e",
   width: "device-width",
   initialScale: 1,
 };
@@ -100,9 +100,12 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${syne.variable} ${figtree.variable} antialiased atmosphere`}>
+        <a href="#contenu" className="skip-link">
+          Aller au contenu
+        </a>
         <OrganizationJsonLd />
         <Header />
-        <main>{children}</main>
+        <main id="contenu">{children}</main>
         <Footer />
         <WhatsAppFloat />
       </body>

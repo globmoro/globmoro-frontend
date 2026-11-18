@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0b1218;
-  --ink-soft: #142029;
-  --slate: #1c2b36;
-  --mist: #9bb0bf;
-  --paper: #e7eef2;
-  --copper: #c8793a;
-  --copper-bright: #e0924f;
-  --steel: #5a7384;
-  --line: rgba(155, 176, 191, 0.22);
-  --glow: rgba(200, 121, 58, 0.18);
+  --ink: #060a0e;
+  --ink-soft: #101820;
+  --slate: #1a2833;
+  --mist: #b7c7d3;
+  --mist-bright: #d2dde6;
+  --paper: #f2f6f8;
+  --copper: #d4843c;
+  --copper-bright: #e9a05a;
+  --steel: #7a93a3;
+  --steel-bright: #9eb0bd;
+  --line: rgba(210, 221, 230, 0.28);
+  --glow: rgba(212, 132, 60, 0.22);
 
   --background: var(--ink);
   --foreground: var(--paper);
@@ -23,10 +25,12 @@
   --color-ink-soft: var(--ink-soft);
   --color-slate: var(--slate);
   --color-mist: var(--mist);
+  --color-mist-bright: var(--mist-bright);
   --color-paper: var(--paper);
   --color-copper: var(--copper);
   --color-copper-bright: var(--copper-bright);
   --color-steel: var(--steel);
+  --color-steel-bright: var(--steel-bright);
   --font-display: var(--font-syne);
   --font-sans: var(--font-figtree);
 }
@@ -62,15 +66,50 @@ a {
 }
 
 ::selection {
-  background: rgba(200, 121, 58, 0.35);
+  background: rgba(212, 132, 60, 0.4);
   color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--copper-bright);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--copper);
+  color: #120c08;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.site-header {
+  background: rgba(6, 10, 14, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
 }
 
 .atmosphere {
   background:
-    radial-gradient(1200px 700px at 80% -10%, rgba(200, 121, 58, 0.16), transparent 55%),
-    radial-gradient(900px 500px at 10% 20%, rgba(90, 115, 132, 0.22), transparent 50%),
-    linear-gradient(165deg, #0b1218 0%, #101b24 45%, #0d151c 100%);
+    linear-gradient(180deg, rgba(16, 24, 32, 0.35) 0%, transparent 28%),
+    repeating-linear-gradient(
+      -12deg,
+      transparent 0,
+      transparent 11px,
+      rgba(155, 176, 191, 0.03) 11px,
+      rgba(155, 176, 191, 0.03) 12px
+    ),
+    radial-gradient(1100px 640px at 88% -8%, rgba(212, 132, 60, 0.12), transparent 55%),
+    radial-gradient(800px 480px at 8% 18%, rgba(90, 115, 132, 0.18), transparent 50%),
+    linear-gradient(165deg, #060a0e 0%, #0d161e 48%, #0a1218 100%);
 }
 
 .grain::before {
@@ -78,9 +117,66 @@ a {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.07;
+  opacity: 0.08;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
+}
+
+.hero-rail {
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--copper) 18%,
+    var(--copper-bright) 50%,
+    var(--copper) 82%,
+    transparent
+  );
+}
+
+.trust-strip {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(212, 132, 60, 0.08) 0,
+      rgba(212, 132, 60, 0.08) 12px,
+      transparent 12px,
+      transparent 24px
+    ),
+    rgba(16, 24, 32, 0.92);
+}
+
+.trust-mark {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--copper);
+  transform: rotate(45deg);
+}
+
+.section-kicker {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper-bright);
+}
+
+.price-plate {
+  border: 1px solid rgba(233, 160, 90, 0.45);
+  background: rgba(6, 10, 14, 0.72);
+  padding: 0.35rem 0.7rem;
+}
+
+.industrial-panel {
+  background:
+    linear-gradient(135deg, rgba(212, 132, 60, 0.08), transparent 42%),
+    rgba(16, 24, 32, 0.78);
+  border-top: 1px solid var(--line);
 }
 
 @keyframes rise {
@@ -100,15 +196,6 @@ a {
   }
   to {
     transform: scale(1) translate3d(0, -1.5%, 0);
-  }
-}
-
-@keyframes underline-grow {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
   }
 }
 
@@ -159,12 +246,12 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  padding: 0.9rem 1.35rem;
+  padding: 0.95rem 1.4rem;
   background: var(--copper);
   color: #120c08;
-  font-weight: 650;
-  letter-spacing: 0.01em;
-  border: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
   transition: background 0.25s ease, transform 0.25s ease;
 }
 
@@ -178,20 +265,21 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  padding: 0.9rem 1.35rem;
-  border: 1px solid var(--line);
+  padding: 0.95rem 1.4rem;
+  border: 1px solid rgba(210, 221, 230, 0.42);
   color: var(--paper);
+  font-weight: 650;
   transition: border-color 0.25s ease, background 0.25s ease;
 }
 
 .btn-ghost:hover {
-  border-color: rgba(200, 121, 58, 0.55);
-  background: rgba(200, 121, 58, 0.08);
+  border-color: rgba(233, 160, 90, 0.7);
+  background: rgba(212, 132, 60, 0.12);
 }
 
 .field {
   width: 100%;
-  background: rgba(11, 18, 24, 0.55);
+  background: rgba(6, 10, 14, 0.65);
   border: 1px solid var(--line);
   color: var(--paper);
   padding: 0.85rem 1rem;
@@ -201,12 +289,12 @@ a {
 }
 
 .field:focus {
-  border-color: rgba(200, 121, 58, 0.7);
+  border-color: rgba(233, 160, 90, 0.8);
   box-shadow: 0 0 0 3px var(--glow);
 }
 
 .field::placeholder {
-  color: rgba(155, 176, 191, 0.55);
+  color: rgba(183, 199, 211, 0.65);
 }
 
 .wa-float {
@@ -221,9 +309,10 @@ a {
   background: #1f6b45;
   color: #f3fff8;
   font-size: 0.85rem;
-  font-weight: 650;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  border: 1px solid rgba(125, 255, 178, 0.25);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
   transition: transform 0.25s ease, background 0.25s ease;
 }
@@ -255,6 +344,10 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .animate-rise,
   .animate-rise-delay-1,
   .animate-rise-delay-2,
