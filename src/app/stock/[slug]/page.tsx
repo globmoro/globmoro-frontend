@@ -38,9 +38,9 @@ export default async function MachinePage({ params }: Props) {
         <div className="mx-auto max-w-6xl">
           <Link
             href="/stock"
-            className="cta-underline text-xs uppercase tracking-[0.16em] text-mist"
+            className="cta-underline text-xs uppercase tracking-[0.16em] text-mist-bright"
           >
-            ← Retour au stock
+            ← Retour aux machines
           </Link>
         </div>
       </div>

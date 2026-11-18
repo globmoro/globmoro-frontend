@@ -1,4 +1,6 @@
-/** Specs from Richter invoice + owner-approved facts + sales sheets. Cite-or-silence. */
+/** Specs from Richter invoice + owner-approved facts + sales sheets. Cite-or-silence.
+ * Public site: no selling prices — "Prix sur demande" only.
+ */
 
 export type MachinePhoto = {
   src: string;
@@ -25,13 +27,16 @@ export type Machine = {
   charger: string;
   serial?: string;
   condition: string;
-  priceMadTtc: number;
+  /** Public display only — never numeric asking price on site. */
   priceLabel: string;
+  /** WhatsApp interest enum for backend / prefills */
+  interestKey: "linde" | "toyota";
   equipment: string[];
   heroImage: string;
   photos: MachinePhoto[];
   shortPitch: string;
   metaDescription: string;
+  whatsappPrefill: string;
 };
 
 export const machines: Machine[] = [
@@ -55,8 +60,8 @@ export const machines: Machine[] = [
     charger: "GNB Intronic D 48 V / 100 A — inclus",
     serial: "H2X 386 V 10827",
     condition: "Bon état (évaluation propriétaire) — inspection recommandée",
-    priceMadTtc: 230_000,
-    priceLabel: "230 000 MAD TTC",
+    priceLabel: "Prix sur demande",
+    interestKey: "linde",
     equipment: [
       "Sideshift",
       "2 fonctions hydrauliques additionnelles",
@@ -79,7 +84,9 @@ export const machines: Machine[] = [
     shortPitch:
       "Électrique 2 t · mât triplex 4 625 mm · batterie 930 Ah · chargeur inclus · stock Agadir.",
     metaDescription:
-      "LINDE E20 PHL-02 2019, 2000 kg, 3 807 h, triplex 4625 mm, chargeur inclus. 230 000 MAD TTC. Stock GLOBMORO Agadir — vendu en l’état, inspection libre.",
+      "LINDE E20 PHL-02 2019, 2000 kg, 3 807 h, triplex 4625 mm, chargeur inclus. Prix sur demande. Stock GLOBMORO Agadir — vendu en l’état, inspection libre.",
+    whatsappPrefill:
+      "Bonjour GLOBMORO, je suis intéressé par le LINDE E20 électrique 2T (2019) à Agadir (El Wifaq) — mât triplex 4625 mm, 3 807 h, batterie + chargeur inclus. Pouvez-vous m’envoyer une offre et les modalités d’inspection ?",
   },
   {
     slug: "toyota-7fbest15",
@@ -101,8 +108,8 @@ export const machines: Machine[] = [
     charger: "24 V / 100 A — inclus",
     serial: "7FBEST15-E 14626",
     condition: "Bon état (évaluation propriétaire) — inspection recommandée",
-    priceMadTtc: 150_000,
-    priceLabel: "150 000 MAD TTC",
+    priceLabel: "Prix sur demande",
+    interestKey: "toyota",
     equipment: [
       "Positionneur + sideshift",
       "2 fonctions hydrauliques additionnelles",
@@ -124,7 +131,9 @@ export const machines: Machine[] = [
     shortPitch:
       "Électrique 1,5 t · mât duplex 3 010 mm · ~1 300 h · chargeur inclus · stock Agadir.",
     metaDescription:
-      "TOYOTA 7FBEST15 2015, 1500 kg, ~1 300 h, duplex 3010 mm, chargeur inclus. 150 000 MAD TTC. Stock GLOBMORO Agadir — vendu en l’état, inspection libre.",
+      "TOYOTA 7FBEST15 2015, 1500 kg, ~1 300 h, duplex 3010 mm, chargeur inclus. Prix sur demande. Stock GLOBMORO Agadir — vendu en l’état, inspection libre.",
+    whatsappPrefill:
+      "Bonjour GLOBMORO, je suis intéressé par le TOYOTA 7FBEST15 électrique 1,5T (2015) à Agadir (El Wifaq) — positionneur + sideshift, ~1 300 h, batterie + chargeur inclus. Pouvez-vous m’envoyer une offre et les modalités d’inspection ?",
   },
 ];
 

@@ -12,7 +12,7 @@ export function TrustStrip() {
       role="region"
       aria-label="Points clés"
     >
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-paper md:px-8">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-ink md:px-8">
         {items.map((item) => (
           <span key={item} className="inline-flex items-center gap-2.5">
             <span className="trust-mark" aria-hidden />

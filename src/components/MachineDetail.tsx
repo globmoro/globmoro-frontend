@@ -5,8 +5,6 @@ import { company, whatsappUrl } from "@/data/company";
 import { Machine, saleDisclaimer, saleTerms } from "@/data/machines";
 
 export function MachineDetail({ machine }: { machine: Machine }) {
-  const waMessage = `Bonjour GLOBMORO, je suis intéressé par le ${machine.brand} ${machine.model} (${machine.priceLabel}).`;
-
   return (
     <article>
       <ProductJsonLd slug={machine.slug} />
@@ -15,64 +13,73 @@ export function MachineDetail({ machine }: { machine: Machine }) {
         <MachineGallery photos={machine.photos} />
 
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-copper">
-            Stock Agadir · n° {machine.productCode}
-          </p>
-          <h1 className="mt-3 text-4xl leading-none md:text-5xl">
+          <p className="section-kicker">Stock Agadir · n° {machine.productCode}</p>
+          <h1 className="mt-3 text-4xl leading-none text-ink md:text-5xl">
             {machine.brand}{" "}
-            <span className="text-mist">{machine.model}</span>
+            <span className="text-slate">{machine.model}</span>
           </h1>
-          <p className="mt-4 text-lg text-mist">{machine.shortPitch}</p>
-          <p className="mt-6 text-3xl font-semibold tracking-tight text-copper-bright">
+          <p className="mt-4 text-lg text-mist-bright">{machine.shortPitch}</p>
+          <p className="price-plate mt-6 inline-block text-2xl tracking-tight">
             {machine.priceLabel}
           </p>
-          <p className="mt-3 text-sm text-steel">{saleDisclaimer}</p>
+          <p className="mt-3 text-sm text-mist">{saleDisclaimer}</p>
 
           <dl className="mt-8 grid grid-cols-2 gap-4 text-sm">
             <div>
-              <dt className="text-xs uppercase tracking-[0.12em] text-steel">Année</dt>
-              <dd className="mt-1 text-paper">{machine.year}</dd>
+              <dt className="text-xs uppercase tracking-[0.12em] text-steel">
+                Année
+              </dt>
+              <dd className="mt-1 text-ink">{machine.year}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-[0.12em] text-steel">Heures</dt>
-              <dd className="mt-1 text-paper">{machine.hours}</dd>
+              <dt className="text-xs uppercase tracking-[0.12em] text-steel">
+                Heures
+              </dt>
+              <dd className="mt-1 text-ink">{machine.hours}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-[0.12em] text-steel">Capacité</dt>
-              <dd className="mt-1 text-paper">
+              <dt className="text-xs uppercase tracking-[0.12em] text-steel">
+                Capacité
+              </dt>
+              <dd className="mt-1 text-ink">
                 {machine.capacityKg.toLocaleString("fr-FR")} kg
               </dd>
             </div>
             <div>
-              <dt className="text-xs uppercase tracking-[0.12em] text-steel">Levée</dt>
-              <dd className="mt-1 text-paper">
+              <dt className="text-xs uppercase tracking-[0.12em] text-steel">
+                Levée
+              </dt>
+              <dd className="mt-1 text-ink">
                 {machine.liftMaxMm.toLocaleString("fr-FR")} mm
               </dd>
             </div>
           </dl>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={whatsappUrl(waMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={`/contact?machine=${machine.interestKey}`}
               className="btn-primary"
             >
-              Demander sur WhatsApp
+              Recevoir une offre
+            </Link>
+            <a
+              href={whatsappUrl(machine.whatsappPrefill)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost"
+            >
+              WhatsApp
             </a>
             <a href={`tel:${company.tel}`} className="btn-ghost">
               Appeler
             </a>
-            <Link href="/contact" className="btn-ghost">
-              Formulaire
-            </Link>
           </div>
         </div>
       </div>
 
       <section className="mt-16 border-t border-[var(--line)] pt-12">
-        <h2 className="text-2xl md:text-3xl">Caractéristiques</h2>
-        <p className="mt-3 max-w-2xl text-sm text-mist">
+        <h2 className="text-2xl text-ink md:text-3xl">Caractéristiques</h2>
+        <p className="mt-3 max-w-2xl text-sm text-mist-bright">
           Specs issues des documents d’achat / fiche propriétaire. Ce qui n’est
           pas prouvé n’est pas affiché.
         </p>
@@ -91,25 +98,27 @@ export function MachineDetail({ machine }: { machine: Machine }) {
             ["État batterie", machine.batteryHealth],
             ["Chargeur", machine.charger],
             ["État", machine.condition],
-            ...(machine.serial ? ([["N° de série", machine.serial]] as const) : []),
+            ...(machine.serial
+              ? ([["N° de série", machine.serial]] as const)
+              : []),
           ].map(([label, value]) => (
             <div key={label} className="border-b border-[var(--line)] pb-4">
               <dt className="text-xs uppercase tracking-[0.14em] text-steel">
                 {label}
               </dt>
-              <dd className="mt-2 text-sm leading-relaxed text-paper">{value}</dd>
+              <dd className="mt-2 text-sm leading-relaxed text-ink">{value}</dd>
             </div>
           ))}
         </dl>
       </section>
 
       <section className="mt-12">
-        <h2 className="text-2xl md:text-3xl">Équipements</h2>
+        <h2 className="text-2xl text-ink md:text-3xl">Équipements</h2>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2">
           {machine.equipment.map((item) => (
             <li
               key={item}
-              className="border-l border-copper pl-4 text-sm text-mist"
+              className="border-l-2 border-accent pl-4 text-sm text-mist-bright"
             >
               {item}
             </li>
@@ -117,9 +126,9 @@ export function MachineDetail({ machine }: { machine: Machine }) {
         </ul>
       </section>
 
-      <section className="mt-14 border border-[var(--line)] bg-ink-soft/70 px-6 py-8 md:px-8">
-        <h2 className="text-xl">Conditions de vente</h2>
-        <ul className="mt-4 space-y-2 text-sm leading-relaxed text-mist">
+      <section className="mt-14 border border-[var(--line)] bg-paper-pure px-6 py-8 md:px-8">
+        <h2 className="text-xl text-ink">Conditions de vente</h2>
+        <ul className="mt-4 space-y-2 text-sm leading-relaxed text-mist-bright">
           {saleTerms.map((term) => (
             <li key={term}>{term}</li>
           ))}

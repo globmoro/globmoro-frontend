@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-import { company, whatsappUrl } from "@/data/company";
+import { InstagramIcon } from "@/components/InstagramIcon";
+import { company } from "@/data/company";
 
 const links = [
   { href: "/", label: "Accueil" },
-  { href: "/stock", label: "Stock" },
-  { href: "/a-propos", label: "Entreprise" },
+  { href: "/stock", label: "Nos machines" },
+  { href: "/services", label: "Nos services" },
+  { href: "/a-propos", label: "À propos" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -46,15 +48,15 @@ export function Header() {
 
   return (
     <header className="site-header sticky top-0 z-40">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
         <Link
           href="/"
-          className="brand-mark text-xl tracking-[0.08em] text-paper md:text-2xl"
+          className="brand-mark text-xl tracking-[0.08em] text-ink md:text-2xl"
         >
           {company.name}
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Principale">
+        <nav className="hidden items-center gap-6 xl:flex" aria-label="Principale">
           {links.map((link) => {
             const active =
               link.href === "/"
@@ -64,8 +66,8 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`cta-underline text-sm font-semibold uppercase tracking-[0.14em] ${
-                  active ? "text-copper-bright" : "text-paper"
+                className={`cta-underline text-sm font-semibold uppercase tracking-[0.12em] ${
+                  active ? "text-accent" : "text-ink"
                 }`}
                 aria-current={active ? "page" : undefined}
               >
@@ -74,21 +76,23 @@ export function Header() {
             );
           })}
           <a
-            href={whatsappUrl(
-              "Bonjour GLOBMORO, je souhaite des informations sur vos chariots.",
-            )}
+            href={company.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary text-sm"
+            className="icon-link"
+            aria-label="Instagram GLOBMORO"
           >
-            WhatsApp
+            <InstagramIcon />
           </a>
+          <Link href="/contact" className="btn-primary text-sm">
+            Demander un devis
+          </Link>
         </nav>
 
         <button
           ref={buttonRef}
           type="button"
-          className="inline-flex items-center border border-[var(--line)] bg-ink/40 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-paper lg:hidden"
+          className="inline-flex items-center border border-[var(--line-strong)] bg-paper-pure px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-ink xl:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
@@ -102,7 +106,7 @@ export function Header() {
         <div
           ref={panelRef}
           id={menuId}
-          className="border-t border-[var(--line)] bg-ink px-5 py-4 lg:hidden"
+          className="border-t border-[var(--line)] bg-paper-pure px-5 py-4 xl:hidden"
         >
           <nav className="flex flex-col gap-4" aria-label="Mobile">
             {links.map((link) => {
@@ -115,7 +119,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   className={`text-sm font-semibold uppercase tracking-[0.14em] ${
-                    active ? "text-copper-bright" : "text-paper"
+                    active ? "text-accent" : "text-ink"
                   }`}
                   aria-current={active ? "page" : undefined}
                   onClick={() => setOpen(false)}
@@ -125,14 +129,21 @@ export function Header() {
               );
             })}
             <a
-              href={whatsappUrl()}
+              href={company.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-ink"
+              onClick={() => setOpen(false)}
+            >
+              <InstagramIcon /> Instagram
+            </a>
+            <Link
+              href="/contact"
               className="btn-primary text-sm"
               onClick={() => setOpen(false)}
             >
-              WhatsApp
-            </a>
+              Demander un devis
+            </Link>
           </nav>
         </div>
       ) : null}
