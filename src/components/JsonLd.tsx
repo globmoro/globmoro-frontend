@@ -10,6 +10,7 @@ export function OrganizationJsonLd() {
     url: company.siteUrl,
     email: company.email,
     telephone: company.tel,
+    sameAs: [company.instagramUrl],
     address: {
       "@type": "PostalAddress",
       streetAddress: "Bloc C N° 324, El Wifaq Bensergao",
@@ -48,7 +49,6 @@ export function ProductJsonLd({ slug }: { slug: string }) {
       "@type": "Offer",
       url: `${company.siteUrl}/stock/${machine.slug}`,
       priceCurrency: "MAD",
-      price: machine.priceMadTtc,
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/UsedCondition",
       seller: {

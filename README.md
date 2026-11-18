@@ -8,20 +8,23 @@ Stack : **Next.js 15 (App Router) + TypeScript + Tailwind CSS v4**.
 
 | Route | Contenu |
 |---|---|
-| `/` | Accueil — hero marque, stock, offre, parcours, contact |
-| `/stock` | Liste LINDE E20 + TOYOTA 7FBEST15 |
-| `/stock/linde-e20` | Fiche LINDE (specs, galerie, prix TTC) |
+| `/` | Accueil — hero, machines, services, why, parcours, Instagram, FAQ, CTA |
+| `/stock` | Nos machines — LINDE E20 + TOYOTA 7FBEST15 |
+| `/stock/linde-e20` | Fiche LINDE (specs, galerie, prix sur demande) |
 | `/stock/toyota-7fbest15` | Fiche TOYOTA |
+| `/services` | Vente / location / import / sourcing / pièces / entretien |
 | `/a-propos` | Entreprise — ICE/RC/IF, engagement, limites |
-| `/contact` | WhatsApp / tél / e-mail + formulaire API |
+| `/contact` | Devis — WhatsApp / tél / e-mail + formulaire → `/api/inquiries` |
 
 ## Contenu & conformité (cite-or-silence)
 
 - Français (marché Maroc B2B).
-- Prix : **230 000 MAD TTC** (LINDE) / **150 000 MAD TTC** (TOYOTA).
+- **Prix sur demande** — aucun montant de vente affiché (230k / 150k retirés du site).
+- CTAs : Recevoir une offre / Demander un devis / WhatsApp.
 - Mentions : *vendu en l’état* / *inspection libre* — **pas de garantie**.
 - Trust accueil : import Europe documenté, stock Agadir, SARL — **ICE / RC / IF uniquement sur `/a-propos`**.
-- **Interdit** : coûts d’achat, floors confidentiels, avis fictifs, heures inventées, « parfait état ».
+- Instagram : https://www.instagram.com/globmoro/
+- **Interdit** : coûts d’achat, floors confidentiels, avis fictifs, heures inventées, « parfait état », SOH %, garantie.
 
 Sources : Project store `docs/company-drive-brief.md` + `docs/owner-approved-facts.md`.
 
@@ -48,7 +51,7 @@ npm start
 
 | Variable | Obligatoire | Rôle |
 |---|---|---|
-| `NEXT_PUBLIC_API_URL` | Pour le formulaire | Base URL backend → `POST {URL}/contact` |
+| `NEXT_PUBLIC_API_URL` | Pour le formulaire | Base URL backend → `POST {URL}/api/inquiries` |
 | `NEXT_PUBLIC_SITE_URL` | Recommandé | Canonical / sitemap / Open Graph / JSON-LD |
 | `NEXT_PUBLIC_WHATSAPP` | Optionnel | WhatsApp E.164 (fallback brochure) |
 | `NEXT_PUBLIC_PHONE` | Optionnel | Téléphone Maroc (fallback brochure) |
@@ -61,35 +64,22 @@ Voir `.env.example`.
 
 ## Checklist déploiement EasyPanel
 
-1. **App** : Dockerfile **ou** Nixpacks / Node  
-2. **Repo** : `https://github.com/globmoro/globmoro-frontend`  
-3. **Branch** : `main`  
-4. **Build path** : `.` (racine)  
-5. **Port** : `3000` (ou la valeur de `PORT`)  
-6. **Build** (Nixpacks) : `npm run build`  
-7. **Start** (Nixpacks) : `npm start`  
-8. **Env** : coller les variables du tableau ci-dessus (au minimum `NEXT_PUBLIC_SITE_URL` + `NEXT_PUBLIC_API_URL` vers le backend `globmoro-backend-`)  
+1. **App** : Dockerfile **ou** Nixpacks / Node
+2. **Repo** : `https://github.com/globmoro/globmoro-frontend`
+3. **Branch** : `main`
+4. **Build path** : `.` (racine)
+5. **Port** : `3000` (ou la valeur de `PORT`)
+6. **Build** (Nixpacks) : `npm run build`
+7. **Start** (Nixpacks) : `npm start`
+8. **Env** : `NEXT_PUBLIC_SITE_URL` + `NEXT_PUBLIC_API_URL` vers `globmoro-backend`
 9. Déployer / rebuild après merge sur `main`
 
-Dockerfile multi-stage inclus à la racine pour un déploiement containerisé sans Nixpacks. Les `NEXT_PUBLIC_*` sont acceptés en **build-args** / `ENV` dans le stage `builder`.
-
-Fonts (Syne display + Figtree body) are **self-hosted** under `src/fonts/` via `next/font/local` — no Google Fonts network fetch at build time (required for EasyPanel/Docker).
+Dockerfile multi-stage inclus à la racine. Fonts (Syne + Figtree) **self-hosted** sous `src/fonts/` via `next/font/local` — pas de Google Fonts au build.
 
 ## SEO & dossiers repo
 
 - `src/app/sitemap.ts` → `/sitemap.xml`
 - `src/app/robots.ts` → `/robots.txt`
-- Métadonnées Open Graph / Twitter + JSON-LD Organization / Product
-- Favicon SVG (`src/app/icon.svg`)
+- Métadonnées Open Graph / Twitter + JSON-LD Organization / Product (offre sans prix numérique)
 - Photos machines dans `public/forklifts/`
-- Fonts OFL : `src/fonts/` (Syne + Figtree variable)
-- `.dockerignore`, `.gitignore`, `.env.example`
-
-## Scripts
-
-| Script | Action |
-|---|---|
-| `npm run dev` | Dev server |
-| `npm run build` | Build production |
-| `npm start` | Serve production (`0.0.0.0:$PORT`) |
-| `npm run lint` | ESLint |
+- Fonts OFL : `src/fonts/`

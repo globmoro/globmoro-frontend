@@ -1,21 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #060a0e;
-  --ink-soft: #101820;
-  --slate: #1a2833;
-  --mist: #b7c7d3;
-  --mist-bright: #d2dde6;
-  --paper: #f2f6f8;
-  --copper: #d4843c;
-  --copper-bright: #e9a05a;
-  --steel: #7a93a3;
-  --steel-bright: #9eb0bd;
-  --line: rgba(210, 221, 230, 0.28);
-  --glow: rgba(212, 132, 60, 0.22);
+  /* Light industrial B2B — white / light-grey + charcoal + restrained green */
+  --ink: #1a2229;
+  --ink-soft: #2a343d;
+  --slate: #4a5864;
+  --mist: #5c6b78;
+  --mist-bright: #3d4a55;
+  --paper: #f4f5f6;
+  --paper-pure: #ffffff;
+  --surface: #e9ecef;
+  --accent: #2f6b4f;
+  --accent-bright: #3d8a64;
+  --accent-soft: rgba(47, 107, 79, 0.12);
+  --steel: #6b7c89;
+  --steel-bright: #4f5f6b;
+  --line: rgba(26, 34, 41, 0.12);
+  --line-strong: rgba(26, 34, 41, 0.22);
+  --glow: rgba(47, 107, 79, 0.2);
 
-  --background: var(--ink);
-  --foreground: var(--paper);
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
@@ -27,8 +32,10 @@
   --color-mist: var(--mist);
   --color-mist-bright: var(--mist-bright);
   --color-paper: var(--paper);
-  --color-copper: var(--copper);
-  --color-copper-bright: var(--copper-bright);
+  --color-paper-pure: var(--paper-pure);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
   --color-steel: var(--steel);
   --color-steel-bright: var(--steel-bright);
   --font-display: var(--font-syne);
@@ -46,8 +53,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-figtree), "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
 }
@@ -58,6 +65,7 @@ h3,
 .brand-mark {
   font-family: var(--font-syne), Georgia, serif;
   letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 a {
@@ -66,12 +74,12 @@ a {
 }
 
 ::selection {
-  background: rgba(212, 132, 60, 0.4);
-  color: #fff;
+  background: rgba(47, 107, 79, 0.28);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--copper-bright);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -81,8 +89,8 @@ a {
   top: -100%;
   z-index: 100;
   padding: 0.75rem 1rem;
-  background: var(--copper);
-  color: #120c08;
+  background: var(--accent);
+  color: #fff;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
@@ -92,24 +100,17 @@ a {
 }
 
 .site-header {
-  background: rgba(6, 10, 14, 0.94);
+  background: rgba(244, 245, 246, 0.92);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(10px);
 }
 
 .atmosphere {
   background:
-    linear-gradient(180deg, rgba(16, 24, 32, 0.35) 0%, transparent 28%),
-    repeating-linear-gradient(
-      -12deg,
-      transparent 0,
-      transparent 11px,
-      rgba(155, 176, 191, 0.03) 11px,
-      rgba(155, 176, 191, 0.03) 12px
-    ),
-    radial-gradient(1100px 640px at 88% -8%, rgba(212, 132, 60, 0.12), transparent 55%),
-    radial-gradient(800px 480px at 8% 18%, rgba(90, 115, 132, 0.18), transparent 50%),
-    linear-gradient(165deg, #060a0e 0%, #0d161e 48%, #0a1218 100%);
+    linear-gradient(180deg, #ffffff 0%, transparent 18%),
+    radial-gradient(1000px 520px at 92% -5%, rgba(47, 107, 79, 0.07), transparent 55%),
+    radial-gradient(700px 420px at 5% 12%, rgba(74, 88, 100, 0.06), transparent 50%),
+    linear-gradient(165deg, #f7f8f9 0%, #eef0f2 48%, #f4f5f6 100%);
 }
 
 .grain::before {
@@ -117,7 +118,7 @@ a {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.08;
+  opacity: 0.06;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
 }
@@ -131,9 +132,9 @@ a {
   background: linear-gradient(
     180deg,
     transparent,
-    var(--copper) 18%,
-    var(--copper-bright) 50%,
-    var(--copper) 82%,
+    var(--accent) 18%,
+    var(--accent-bright) 50%,
+    var(--accent) 82%,
     transparent
   );
 }
@@ -142,19 +143,19 @@ a {
   background:
     repeating-linear-gradient(
       90deg,
-      rgba(212, 132, 60, 0.08) 0,
-      rgba(212, 132, 60, 0.08) 12px,
+      rgba(47, 107, 79, 0.06) 0,
+      rgba(47, 107, 79, 0.06) 12px,
       transparent 12px,
       transparent 24px
     ),
-    rgba(16, 24, 32, 0.92);
+    var(--surface);
 }
 
 .trust-mark {
   display: inline-block;
   width: 0.55rem;
   height: 0.55rem;
-  background: var(--copper);
+  background: var(--accent);
   transform: rotate(45deg);
 }
 
@@ -163,19 +164,21 @@ a {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--copper-bright);
+  color: var(--accent);
 }
 
 .price-plate {
-  border: 1px solid rgba(233, 160, 90, 0.45);
-  background: rgba(6, 10, 14, 0.72);
+  border: 1px solid rgba(47, 107, 79, 0.35);
+  background: rgba(255, 255, 255, 0.88);
   padding: 0.35rem 0.7rem;
+  color: var(--ink);
+  font-weight: 650;
 }
 
 .industrial-panel {
   background:
-    linear-gradient(135deg, rgba(212, 132, 60, 0.08), transparent 42%),
-    rgba(16, 24, 32, 0.78);
+    linear-gradient(135deg, rgba(47, 107, 79, 0.06), transparent 42%),
+    var(--surface);
   border-top: 1px solid var(--line);
 }
 
@@ -247,8 +250,8 @@ a {
   justify-content: center;
   gap: 0.55rem;
   padding: 0.95rem 1.4rem;
-  background: var(--copper);
-  color: #120c08;
+  background: var(--accent);
+  color: #f7fbf8;
   font-weight: 700;
   letter-spacing: 0.02em;
   border: 1px solid transparent;
@@ -256,8 +259,14 @@ a {
 }
 
 .btn-primary:hover {
-  background: var(--copper-bright);
+  background: var(--accent-bright);
   transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  transform: none;
+  cursor: not-allowed;
 }
 
 .btn-ghost {
@@ -266,22 +275,34 @@ a {
   justify-content: center;
   gap: 0.55rem;
   padding: 0.95rem 1.4rem;
-  border: 1px solid rgba(210, 221, 230, 0.42);
-  color: var(--paper);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
   font-weight: 650;
+  background: rgba(255, 255, 255, 0.55);
   transition: border-color 0.25s ease, background 0.25s ease;
 }
 
 .btn-ghost:hover {
-  border-color: rgba(233, 160, 90, 0.7);
-  background: rgba(212, 132, 60, 0.12);
+  border-color: rgba(47, 107, 79, 0.55);
+  background: var(--accent-soft);
+}
+
+.btn-ghost-on-dark {
+  border-color: rgba(242, 246, 248, 0.45);
+  color: #f2f6f8;
+  background: transparent;
+}
+
+.btn-ghost-on-dark:hover {
+  border-color: rgba(242, 246, 248, 0.75);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .field {
   width: 100%;
-  background: rgba(6, 10, 14, 0.65);
-  border: 1px solid var(--line);
-  color: var(--paper);
+  background: var(--paper-pure);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
   padding: 0.85rem 1rem;
   font: inherit;
   outline: none;
@@ -289,12 +310,12 @@ a {
 }
 
 .field:focus {
-  border-color: rgba(233, 160, 90, 0.8);
+  border-color: rgba(47, 107, 79, 0.7);
   box-shadow: 0 0 0 3px var(--glow);
 }
 
 .field::placeholder {
-  color: rgba(183, 199, 211, 0.65);
+  color: rgba(92, 107, 120, 0.7);
 }
 
 .wa-float {
@@ -312,8 +333,8 @@ a {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border: 1px solid rgba(125, 255, 178, 0.25);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(125, 255, 178, 0.2);
+  box-shadow: 0 12px 28px rgba(26, 34, 41, 0.18);
   transition: transform 0.25s ease, background 0.25s ease;
 }
 
@@ -329,6 +350,23 @@ a {
   background: #7dffb2;
   box-shadow: 0 0 0 0 rgba(125, 255, 178, 0.55);
   animation: pulse-dot 2s ease infinite;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.icon-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 @keyframes pulse-dot {

@@ -1,13 +1,11 @@
 "use client";
 
-import { company, whatsappUrl } from "@/data/company";
+import { company, defaultWhatsappMessage, whatsappUrl } from "@/data/company";
 
 export function WhatsAppFloat() {
   return (
     <a
-      href={whatsappUrl(
-        "Bonjour GLOBMORO, je souhaite des informations sur le stock Agadir.",
-      )}
+      href={whatsappUrl(defaultWhatsappMessage)}
       target="_blank"
       rel="noopener noreferrer"
       className="wa-float"

@@ -12,7 +12,7 @@ export function MachineGallery({ photos }: { photos: MachinePhoto[] }) {
 
   return (
     <div>
-      <div className="relative aspect-[4/3] overflow-hidden bg-slate">
+      <div className="relative aspect-[4/3] overflow-hidden bg-surface">
         <Image
           src={current.src}
           alt={current.alt}
@@ -30,7 +30,7 @@ export function MachineGallery({ photos }: { photos: MachinePhoto[] }) {
             onClick={() => setActive(index)}
             className={`relative h-16 w-20 shrink-0 overflow-hidden border ${
               index === active
-                ? "border-copper"
+                ? "border-accent"
                 : "border-transparent opacity-70 hover:opacity-100"
             }`}
             aria-label={photo.alt}

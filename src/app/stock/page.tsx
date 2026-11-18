@@ -6,9 +6,9 @@ import { company, whatsappUrl } from "@/data/company";
 import { machines, saleDisclaimer } from "@/data/machines";
 
 export const metadata: Metadata = {
-  title: "Stock",
+  title: "Nos machines",
   description:
-    "Stock GLOBMORO Agadir — LINDE E20 PHL-02 2019 (230 000 MAD TTC) et TOYOTA 7FBEST15 2015 (150 000 MAD TTC). Vente en l’état, inspection libre.",
+    "Stock GLOBMORO Agadir — LINDE E20 PHL-02 2019 et TOYOTA 7FBEST15 2015. Prix sur demande. Vente en l’état, inspection libre.",
   alternates: { canonical: "/stock" },
 };
 
@@ -17,28 +17,28 @@ export default function StockPage() {
     <>
       <div className="px-5 pb-8 pt-10 md:px-8 md:pt-14">
         <div className="mx-auto max-w-6xl">
-          <p className="text-xs uppercase tracking-[0.18em] text-copper">Stock</p>
+          <p className="section-kicker">Nos machines</p>
           <h1 className="mt-4 max-w-3xl text-4xl md:text-5xl">
             Deux chariots électriques disponibles à Agadir
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist md:text-lg">
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist-bright md:text-lg">
             Vente ferme B2B. {saleDisclaimer} Photos et specs ci-dessous ;
-            décision après visite sur site.
+            décision après visite sur site. Prix sur demande.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/contact" className="btn-primary">
+              Recevoir une offre
+            </Link>
             <a
               href={whatsappUrl(
-                "Bonjour GLOBMORO, je souhaite des infos sur le stock Agadir.",
+                "Bonjour GLOBMORO, je souhaite des infos sur le stock Agadir et recevoir une offre.",
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary"
+              className="btn-ghost"
             >
               WhatsApp {company.whatsappDisplay}
             </a>
-            <Link href="/contact" className="btn-ghost">
-              Demande écrite
-            </Link>
           </div>
         </div>
       </div>
@@ -48,12 +48,14 @@ export default function StockPage() {
       <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-16">
         <div className="space-y-10">
           {machines.map((machine) => (
-            <Link
+            <article
               key={machine.slug}
-              href={`/stock/${machine.slug}`}
-              className="group grid overflow-hidden border border-[var(--line)] transition hover:border-[rgba(200,121,58,0.45)] lg:grid-cols-[1.1fr_0.9fr]"
+              className="grid overflow-hidden border border-[var(--line)] bg-paper-pure lg:grid-cols-[1.1fr_0.9fr]"
             >
-              <div className="relative min-h-[300px] lg:min-h-[400px]">
+              <Link
+                href={`/stock/${machine.slug}`}
+                className="group relative min-h-[300px] lg:min-h-[400px]"
+              >
                 <Image
                   src={machine.heroImage}
                   alt={`${machine.brand} ${machine.model}`}
@@ -61,29 +63,55 @@ export default function StockPage() {
                   className="object-cover transition duration-[1.1s] ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 1024px) 100vw, 55vw"
                 />
-              </div>
-              <div className="flex flex-col justify-center bg-ink-soft/60 p-7 md:p-10">
-                <p className="text-xs uppercase tracking-[0.16em] text-copper">
+              </Link>
+              <div className="flex flex-col justify-center p-7 md:p-10">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
                   {machine.year} · {machine.capacityKg} kg · {machine.hours} ·{" "}
                   {machine.origin}
                 </p>
                 <h2 className="mt-3 text-3xl md:text-4xl">
-                  {machine.brand} {machine.model}
+                  <Link href={`/stock/${machine.slug}`} className="cta-underline">
+                    {machine.brand} {machine.model}
+                  </Link>
                 </h2>
-                <p className="mt-4 text-sm leading-relaxed text-mist md:text-base">
+                <p className="mt-4 text-sm leading-relaxed text-mist-bright md:text-base">
                   {machine.shortPitch}
                 </p>
-                <ul className="mt-5 space-y-1 text-sm text-steel">
-                  <li>Mât {machine.mast} — {machine.liftMaxMm.toLocaleString("fr-FR")} mm</li>
+                <ul className="mt-5 space-y-1 text-sm text-steel-bright">
+                  <li>
+                    Mât {machine.mast} —{" "}
+                    {machine.liftMaxMm.toLocaleString("fr-FR")} mm
+                  </li>
                   <li>{machine.charger}</li>
                   <li>Chargeur inclus · inspection Agadir</li>
                 </ul>
-                <p className="mt-6 text-2xl text-copper-bright">{machine.priceLabel}</p>
-                <span className="cta-underline mt-6 w-fit text-sm uppercase tracking-[0.14em] text-paper">
-                  Voir la fiche complète
-                </span>
+                <p className="price-plate mt-6 inline-block w-fit text-xl">
+                  {machine.priceLabel}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={`/contact?machine=${machine.interestKey}`}
+                    className="btn-primary text-sm"
+                  >
+                    Recevoir une offre
+                  </Link>
+                  <a
+                    href={whatsappUrl(machine.whatsappPrefill)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-ghost text-sm"
+                  >
+                    WhatsApp
+                  </a>
+                  <Link
+                    href={`/stock/${machine.slug}`}
+                    className="cta-underline self-center text-sm font-semibold uppercase tracking-[0.14em]"
+                  >
+                    Fiche complète
+                  </Link>
+                </div>
               </div>
-            </Link>
+            </article>
           ))}
         </div>
       </div>
