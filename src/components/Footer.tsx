@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { company, mailUrl, telUrl, whatsappUrl } from "@/data/company";
@@ -7,9 +8,15 @@ export function Footer() {
     <footer className="border-t border-[var(--line)] bg-surface">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.35fr_1fr_1fr_1fr] md:px-8">
         <div>
-          <p className="brand-mark text-2xl tracking-[0.08em] text-ink">
-            {company.name}
-          </p>
+          <Link href="/" className="inline-block bg-black p-2" aria-label={company.name}>
+            <Image
+              src="/brand/globmoro-logo.png"
+              alt={company.name}
+              width={180}
+              height={136}
+              className="h-auto w-[9.5rem] object-contain"
+            />
+          </Link>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-mist-bright">
             {company.legalName} — {company.activity}. Stock à {company.city},{" "}
             {company.region}.
