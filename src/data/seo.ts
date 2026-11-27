@@ -72,6 +72,13 @@ export const locationLanding = {
   h1: "Location de chariot élévateur électrique à Agadir",
 } as const;
 
+export const buyerGuideLanding = {
+  path: "/guides/choisir-chariot-elevateur",
+  title: "Choisir un chariot élévateur",
+  description:
+    "Guide : capacité, hauteur, électrique vs diesel, occasion et location — pour trouver le bon chariot élévateur à Agadir / Maroc.",
+} as const;
+
 export const seoFaqExtra = [
   {
     q: "Où trouver un chariot élévateur électrique à Agadir ?",

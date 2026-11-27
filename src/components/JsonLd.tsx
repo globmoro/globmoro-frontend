@@ -176,3 +176,69 @@ export function ProductJsonLd({ slug }: { slug: string }) {
 
   return <JsonLdScript data={data} />;
 }
+
+export function GuideFaqJsonLd({
+  items,
+}: {
+  items: { q: string; a: string }[];
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
+  return <JsonLdScript data={data} />;
+}
+
+export function ArticleJsonLd({
+  title,
+  description,
+  path,
+  dateModified,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  dateModified: string;
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    inLanguage: "fr-MA",
+    dateModified,
+    author: {
+      "@type": "Organization",
+      name: company.legalName,
+      url: company.siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: company.legalName,
+      logo: {
+        "@type": "ImageObject",
+        url: `${company.siteUrl}/brand/globmoro-logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${company.siteUrl}${path}`,
+    },
+    about: [
+      "chariot élévateur",
+      "chariot élévateur électrique",
+      "manutention Agadir",
+    ],
+  };
+
+  return <JsonLdScript data={data} />;
+}

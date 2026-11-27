@@ -64,6 +64,9 @@ export default function ChariotElevateurAgadirPage() {
             <Link href="/stock" className="btn-primary">
               Voir le stock Agadir
             </Link>
+            <Link href="/guides/choisir-chariot-elevateur" className="btn-ghost">
+              Guide : choisir un chariot
+            </Link>
             <Link href="/contact" className="btn-ghost">
               Demander un devis
             </Link>

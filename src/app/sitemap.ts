@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { company } from "@/data/company";
+import { guides, guidesIndex } from "@/data/guides";
 import { machines } from "@/data/machines";
 import { localLanding, locationLanding } from "@/data/seo";
 
@@ -21,6 +22,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    {
+      url: `${base}${guidesIndex.path}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.88,
+    },
+    ...guides.map((guide) => ({
+      url: `${base}/guides/${guide.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.87,
+    })),
     { url: `${base}/stock`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     ...machines.map((machine) => ({
       url: `${base}/stock/${machine.slug}`,

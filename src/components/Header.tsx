@@ -10,6 +10,7 @@ import { company } from "@/data/company";
 const links = [
   { href: "/", label: "Accueil" },
   { href: "/stock", label: "Nos machines" },
+  { href: "/guides", label: "Guides" },
   { href: "/services", label: "Nos services" },
   { href: "/a-propos", label: "À propos" },
   { href: "/contact", label: "Contact" },

@@ -48,6 +48,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/guides" className="cta-underline">
+                Guides
+              </Link>
+            </li>
+            <li>
               <Link href="/services" className="cta-underline">
                 Nos services
               </Link>
@@ -70,6 +75,14 @@ export function Footer() {
             Agadir & stock
           </p>
           <ul className="mt-4 space-y-2 text-sm text-ink">
+            <li>
+              <Link
+                href="/guides/choisir-chariot-elevateur"
+                className="cta-underline"
+              >
+                Choisir un chariot
+              </Link>
+            </li>
             <li>
               <Link href="/chariot-elevateur-agadir" className="cta-underline">
                 Chariot élévateur Agadir
