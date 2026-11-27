@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaqJsonLd } from "@/components/JsonLd";
 import { InstagramIcon } from "@/components/InstagramIcon";
+import { ProofStats } from "@/components/ProofStats";
+import { SectorStrip } from "@/components/SectorStrip";
 import { TrustStrip } from "@/components/TrustStrip";
 import {
-  commercialOffers,
   company,
+  equipmentFamilies,
   faqItems,
-  services,
+  servicePillars,
   trustPoints,
   whatsappUrl,
 } from "@/data/company";
@@ -61,20 +63,58 @@ export default function HomePage() {
             Agadir · prix / conditions sur devis.
           </p>
           <div className="animate-rise-delay-3 mt-9 flex flex-wrap gap-3">
-            <Link href="/stock" className="btn-primary">
-              Voir nos machines
+            <Link href="/contact" className="btn-primary">
+              Demander un devis
             </Link>
-            <Link
-              href="/contact?offer=location"
-              className="btn-ghost-on-dark btn-ghost"
-            >
-              Demander une location
+            <Link href="/stock" className="btn-ghost-on-dark btn-ghost">
+              Voir le stock
             </Link>
           </div>
         </div>
       </section>
 
       <TrustStrip />
+      <ProofStats />
+      <SectorStrip />
+
+      <section
+        className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20"
+        aria-labelledby="pillars-heading"
+      >
+        <div className="max-w-2xl">
+          <p className="section-kicker">Nos services</p>
+          <h2 id="pillars-heading" className="mt-4 text-3xl md:text-4xl">
+            Vente, conseil, import, suivi
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-mist-bright md:text-lg">
+            Une offre claire autour du stock Agadir — comme un partenaire
+            manutention local, sans catalogue inventé.
+          </p>
+        </div>
+        <ul className="mt-10 grid gap-0 border border-[var(--line)] md:grid-cols-2 lg:grid-cols-4">
+          {servicePillars.map((pillar, index) => (
+            <li
+              key={pillar.id}
+              className={`flex flex-col border-[var(--line)] bg-paper-pure/70 p-6 md:p-7 ${
+                index > 0 ? "border-t md:border-t-0 md:border-l" : ""
+              } ${index > 1 ? "lg:border-t-0" : ""} ${
+                index === 2 ? "md:border-t lg:border-t-0" : ""
+              }`}
+            >
+              <h3 className="text-lg text-ink">{pillar.title}</h3>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-mist-bright">
+                {pillar.text}
+              </p>
+              <Link
+                href={pillar.href}
+                className="cta-underline mt-5 inline-block text-sm font-semibold uppercase tracking-[0.14em]"
+              >
+                {pillar.cta}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section
         id="machines"
@@ -139,70 +179,46 @@ export default function HomePage() {
       </section>
 
       <section
-        className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20"
-        aria-labelledby="services-heading"
+        className="border-y border-[var(--line)] bg-surface/80"
+        aria-labelledby="families-heading"
       >
-        <div className="max-w-2xl">
-          <p className="section-kicker">Nos services</p>
-          <h2 id="services-heading" className="mt-4 text-3xl md:text-4xl">
-            Vente, location, option d’achat
-          </h2>
-          <p className="mt-5 text-base leading-relaxed text-mist-bright md:text-lg">
-            Trois chemins B2B autour du stock Agadir — conditions sur devis,
-            sans loyers ni garanties inventés.
-          </p>
-        </div>
-
-        <ul className="mt-10 grid gap-0 border border-[var(--line)] md:grid-cols-3">
-          {commercialOffers.map((offer, index) => (
-            <li
-              key={offer.id}
-              className={`border-[var(--line)] bg-paper-pure/70 p-6 md:p-7 ${
-                index > 0
-                  ? "border-t md:border-t-0 md:border-l"
-                  : ""
-              }`}
-            >
-              <h3 className="text-xl text-ink">{offer.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-mist-bright">
-                {offer.text}
-              </p>
-            </li>
-          ))}
-        </ul>
-
-        <ul className="mt-8 grid gap-0 border border-[var(--line)] sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <li
-              key={service.slug}
-              className={`border-[var(--line)] bg-paper-pure/50 p-6 ${
-                index > 0 ? "border-t sm:border-t-0 sm:border-l" : ""
-              } ${index > 1 ? "lg:border-t-0" : ""} ${
-                index === 2 || index === 3 ? "sm:border-t lg:border-t-0" : ""
-              } ${index === 3 ? "sm:border-l-0 lg:border-l" : ""} ${
-                index >= 3 ? "border-t" : ""
-              }`}
-            >
-              <h3 className="text-lg text-ink">{service.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-mist-bright">
-                {service.text}
-              </p>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-8 flex flex-wrap gap-5">
-          <Link
-            href="/services"
-            className="cta-underline text-sm font-semibold uppercase tracking-[0.14em]"
-          >
-            Détail des services
-          </Link>
-          <Link
-            href="/contact?offer=location"
-            className="cta-underline text-sm font-semibold uppercase tracking-[0.14em]"
-          >
-            Demander une location
-          </Link>
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+          <div className="max-w-2xl">
+            <p className="section-kicker">Gamme & besoins</p>
+            <h2 id="families-heading" className="mt-4 text-3xl md:text-4xl">
+              Stock réel + sourcing sur demande
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-mist-bright md:text-lg">
+              Nous n’affichons que ce qui est inspectable — et nous cadrons le
+              reste (Clark, nacelle, autre marque) via import Europe.
+            </p>
+          </div>
+          <ul className="mt-10 grid gap-0 border border-[var(--line)] md:grid-cols-2">
+            {equipmentFamilies.map((family, index) => (
+              <li
+                key={family.id}
+                className={`border-[var(--line)] bg-paper-pure p-6 md:p-8 ${
+                  index > 0 ? "border-t md:border-t-0" : ""
+                } ${index % 2 === 1 ? "md:border-l" : ""} ${
+                  index > 1 ? "md:border-t" : ""
+                }`}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                  {family.badge}
+                </p>
+                <h3 className="mt-3 text-xl text-ink">{family.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-mist-bright">
+                  {family.text}
+                </p>
+                <Link
+                  href={family.href}
+                  className="cta-underline mt-5 inline-block text-sm font-semibold uppercase tracking-[0.14em]"
+                >
+                  Voir
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -361,6 +377,48 @@ export default function HomePage() {
           </Link>
           .
         </p>
+      </section>
+
+      <section
+        className="border-t border-[var(--line)] bg-paper-pure/80"
+        aria-labelledby="site-heading"
+      >
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+          <p className="section-kicker">Implantation</p>
+          <h2 id="site-heading" className="mt-3 text-3xl md:text-4xl">
+            Stock et inspection à Agadir
+          </h2>
+          <div className="mt-10 grid gap-0 border border-[var(--line)] md:grid-cols-3">
+            <div className="border-[var(--line)] bg-paper-pure p-6 md:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                Siège / stock
+              </p>
+              <h3 className="mt-3 text-xl text-ink">Agadir</h3>
+              <p className="mt-3 text-sm leading-relaxed text-mist-bright">
+                {company.address}
+              </p>
+            </div>
+            <div className="border-t border-[var(--line)] bg-paper-pure p-6 md:border-t-0 md:border-l md:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                Zone
+              </p>
+              <h3 className="mt-3 text-xl text-ink">{company.region}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-mist-bright">
+                Livraison possible Aït Melloul, Inezgane, Tassila et plus loin —
+                coût à discuter.
+              </p>
+            </div>
+            <div className="border-t border-[var(--line)] bg-paper-pure p-6 md:border-t-0 md:border-l md:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                Contact prioritaire
+              </p>
+              <h3 className="mt-3 text-xl text-ink">WhatsApp</h3>
+              <p className="mt-3 text-sm leading-relaxed text-mist-bright">
+                {company.whatsappDisplay} · {company.contactName}
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section
