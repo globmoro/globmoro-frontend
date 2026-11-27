@@ -139,6 +139,110 @@ export const trustPoints = [
   },
 ] as const;
 
+/** Homepage proof strip — honest counts only (SBEL-inspired IA, not fake scale). */
+export const proofStats = [
+  {
+    value: "2",
+    label: "Machines en stock Agadir",
+    detail: "LINDE E20 · TOYOTA 7FBEST15",
+  },
+  {
+    value: "3",
+    label: "Chemins commerciaux",
+    detail: "Vente · location · option d’achat",
+  },
+  {
+    value: "1",
+    label: "Site d’inspection",
+    detail: "El Wifaq / Bensergao, Agadir",
+  },
+  {
+    value: "EU",
+    label: "Import documenté",
+    detail: "Dossier fournisseur · série · équipements",
+  },
+] as const;
+
+/** Client sectors — Souss / Maroc B2B reality, not invented verticals. */
+export const clientSectors = [
+  "Agroalimentaire",
+  "Froid & conserve",
+  "Packing / export",
+  "Logistique",
+  "Plasturgie",
+  "Distribution",
+] as const;
+
+/**
+ * Four service pillars (SBEL-like clarity).
+ * Links only to real Globmoro pages — no safety-EPI catalogue we don’t sell.
+ */
+export const servicePillars = [
+  {
+    id: "vente-location",
+    title: "Vente et location",
+    text: "Achat ferme, location courte ou plus longue, ou location avec option d’achat — autour du stock Agadir, conditions sur devis.",
+    href: "/services",
+    cta: "Voir les offres",
+  },
+  {
+    id: "etude-conseil",
+    title: "Étude et conseil",
+    text: "Capacité, hauteur, électrique vs diesel, occasion vs location — guide pratique pour cadrer le bon chariot pour votre site.",
+    href: "/guides/choisir-chariot-elevateur",
+    cta: "Lire le guide",
+  },
+  {
+    id: "import",
+    title: "Import Europe",
+    text: "Sourcing documenté selon besoin (autre marque, diesel, nacelle…) — devis après cadrage. Pas de stock fantôme.",
+    href: "/services#import",
+    cta: "Demander un sourcing",
+  },
+  {
+    id: "pieces-sav",
+    title: "Pièces et SAV",
+    text: "Orientation pièces et entretien selon machine — disponibilité et termes à confirmer au cas par cas.",
+    href: "/services#entretien",
+    cta: "En savoir plus",
+  },
+] as const;
+
+/**
+ * Equipment “families” — stock réellement listé + besoins hors stock via sourcing.
+ * Do not invent catalogue counts like a TCM distributor.
+ */
+export const equipmentFamilies = [
+  {
+    id: "electrique-stock",
+    title: "Chariots électriques — stock",
+    text: "LINDE E20 2 t et TOYOTA 7FBEST15 1,5 t — inspectables à Agadir, chargeur inclus, prix sur demande.",
+    badge: "En stock",
+    href: "/stock",
+  },
+  {
+    id: "location",
+    title: "Location / option d’achat",
+    text: "Selon disponibilité du stock — courte ou plus longue durée, option d’achat au cas par cas, sur devis.",
+    badge: "Sur devis",
+    href: "/location-chariot-elevateur-agadir",
+  },
+  {
+    id: "sourcing",
+    title: "Autres besoins (sourcing)",
+    text: "Clark, Still, Jungheinrich, diesel, nacelle, gerbeur, transpalette — demandez un import Europe après cadrage.",
+    badge: "Sur demande",
+    href: "/contact",
+  },
+  {
+    id: "conseil",
+    title: "Aide au choix",
+    text: "Checklist capacité / hauteur / énergie / mode d’achat — avant devis WhatsApp ou visite El Wifaq.",
+    badge: "Guide",
+    href: "/guides/choisir-chariot-elevateur",
+  },
+] as const;
+
 /** Services — honest scope only; no invented SLAs / warranties / rental rates. */
 export const services = [
   {
