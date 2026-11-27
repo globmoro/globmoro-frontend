@@ -113,7 +113,7 @@ export const machines: Machine[] = [
     shortPitch:
       "Électrique 2 t · mât triplex 4 625 mm · batterie 930 Ah · chargeur inclus · stock Agadir.",
     metaDescription:
-      "LINDE E20 PHL-02 2019, 2000 kg, 3 807 h, triplex 4625 mm, chargeur inclus. Prix sur demande. Vente, location ou location avec option d’achat — stock GLOBMORO Agadir.",
+      "Chariot élévateur électrique LINDE E20 PHL-02 2019 à Agadir — 2000 kg, 3 807 h, triplex 4625 mm, chargeur inclus. Prix sur demande. Vente, location ou option d’achat — GLOBMORO.",
     whatsappPrefill:
       "Bonjour GLOBMORO, je suis intéressé par l’achat du LINDE E20 électrique 2T (2019) à Agadir (El Wifaq) — mât triplex 4625 mm, 3 807 h, batterie + chargeur inclus. Pouvez-vous m’envoyer une offre et les modalités d’inspection ?",
   },
@@ -160,7 +160,7 @@ export const machines: Machine[] = [
     shortPitch:
       "Électrique 1,5 t · mât duplex 3 010 mm · ~1 300 h · chargeur inclus · stock Agadir.",
     metaDescription:
-      "TOYOTA 7FBEST15 2015, 1500 kg, ~1 300 h, duplex 3010 mm, chargeur inclus. Prix sur demande. Vente, location ou location avec option d’achat — stock GLOBMORO Agadir.",
+      "Chariot élévateur électrique TOYOTA 7FBEST15 2015 à Agadir — 1500 kg, ~1 300 h, duplex 3010 mm, chargeur inclus. Prix sur demande. Vente, location ou option d’achat — GLOBMORO.",
     whatsappPrefill:
       "Bonjour GLOBMORO, je suis intéressé par l’achat du TOYOTA 7FBEST15 électrique 1,5T (2015) à Agadir (El Wifaq) — positionneur + sideshift, ~1 300 h, batterie + chargeur inclus. Pouvez-vous m’envoyer une offre et les modalités d’inspection ?",
   },

@@ -13,11 +13,16 @@ export function MachineDetail({ machine }: { machine: Machine }) {
         <MachineGallery photos={machine.photos} />
 
         <div>
-          <p className="section-kicker">Stock Agadir · n° {machine.productCode}</p>
+          <p className="section-kicker">
+            Chariot élévateur électrique · Agadir · n° {machine.productCode}
+          </p>
           <h1 className="mt-3 text-4xl leading-none text-ink md:text-5xl">
             {machine.brand}{" "}
             <span className="text-slate">{machine.model}</span>
           </h1>
+          <p className="mt-2 text-sm font-semibold uppercase tracking-[0.12em] text-steel-bright">
+            Occasion · stock {company.city}
+          </p>
           <p className="mt-4 text-lg text-mist-bright">{machine.shortPitch}</p>
           <p className="price-plate mt-6 inline-block text-2xl tracking-tight">
             {machine.priceLabel}

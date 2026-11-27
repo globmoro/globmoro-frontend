@@ -16,13 +16,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const machine = getMachine(slug);
   if (!machine) return { title: "Machine introuvable" };
   return {
-    title: `${machine.brand} ${machine.model}`,
+    title: `${machine.brand} ${machine.model} — chariot élévateur Agadir`,
     description: machine.metaDescription,
     alternates: { canonical: `/stock/${machine.slug}` },
     openGraph: {
-      title: `${machine.brand} ${machine.model} · GLOBMORO`,
+      title: `Chariot élévateur ${machine.brand} ${machine.model} · Agadir`,
       description: machine.metaDescription,
-      images: [{ url: machine.heroImage, alt: `${machine.brand} ${machine.model}` }],
+      images: [
+        {
+          url: machine.heroImage,
+          alt: `Chariot élévateur électrique ${machine.brand} ${machine.model} Agadir`,
+        },
+      ],
     },
   };
 }

@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { FaqJsonLd } from "@/components/JsonLd";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { TrustStrip } from "@/components/TrustStrip";
 import {
@@ -11,15 +13,31 @@ import {
   whatsappUrl,
 } from "@/data/company";
 import { contactHref, machines, saleDisclaimer } from "@/data/machines";
+import {
+  defaultDescription,
+  defaultTitle,
+  localLanding,
+  locationLanding,
+  seoFaqExtra,
+} from "@/data/seo";
+
+export const metadata: Metadata = {
+  title: { absolute: defaultTitle },
+  description: defaultDescription,
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
+  const homeFaq = [...faqItems, ...seoFaqExtra];
+
   return (
     <>
+      <FaqJsonLd />
       <section className="relative min-h-[100svh] overflow-hidden grain">
         <div className="hero-media absolute inset-0">
           <Image
             src="/forklifts/linde/hero.jpg"
-            alt="Chariot élévateur LINDE E20 en stock chez GLOBMORO Agadir"
+            alt="Chariot élévateur électrique LINDE E20 — stock GLOBMORO Agadir"
             fill
             priority
             className="object-cover object-[55%_40%]"
@@ -34,8 +52,9 @@ export default function HomePage() {
           <p className="brand-mark animate-rise text-5xl tracking-[0.12em] text-[#f4f5f6] md:text-7xl lg:text-8xl">
             {company.name}
           </p>
-          <h1 className="animate-rise-delay-1 mt-6 max-w-xl text-2xl font-semibold leading-tight text-[#f4f5f6] md:text-4xl">
-            Chariots électriques d’occasion, prêts à inspecter à Agadir.
+          <h1 className="animate-rise-delay-1 mt-6 max-w-2xl text-2xl font-semibold leading-tight text-[#f4f5f6] md:text-4xl">
+            Chariot élévateur électrique d’occasion à Agadir — inspection sur
+            site.
           </h1>
           <p className="animate-rise-delay-2 mt-5 max-w-lg text-base leading-relaxed text-[#d5dde4] md:text-lg">
             Vente · location · option d’achat — import Europe documenté · stock
@@ -306,7 +325,7 @@ export default function HomePage() {
           </h2>
         </div>
         <div className="mt-10 divide-y divide-[var(--line)] border-y border-[var(--line)]">
-          {faqItems.map((item) => (
+          {homeFaq.map((item) => (
             <details key={item.q} className="group py-5">
               <summary className="cursor-pointer list-none text-lg font-semibold text-ink marker:content-none [&::-webkit-details-marker]:hidden">
                 <span className="flex items-start justify-between gap-4">
@@ -325,6 +344,23 @@ export default function HomePage() {
             </details>
           ))}
         </div>
+        <p className="mt-8 text-sm text-mist-bright">
+          Pages locales :{" "}
+          <Link
+            href={localLanding.path}
+            className="cta-underline text-ink"
+          >
+            chariot élévateur Agadir
+          </Link>
+          {" · "}
+          <Link
+            href={locationLanding.path}
+            className="cta-underline text-ink"
+          >
+            location chariot élévateur Agadir
+          </Link>
+          .
+        </p>
       </section>
 
       <section

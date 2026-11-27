@@ -9,8 +9,8 @@ import {
 } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "Nos services",
-  description: `Services GLOBMORO Agadir — vente, location, location avec option d’achat, import Europe, pièces et entretien. Prix / conditions sur devis.`,
+  title: "Vente & location chariot élévateur Agadir",
+  description: `Services chariot élévateur Agadir — vente, location, location avec option d’achat, import Europe, pièces et entretien. GLOBMORO SARL · prix / conditions sur devis.`,
   alternates: { canonical: "/services" },
 };
 

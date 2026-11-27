@@ -67,12 +67,25 @@ export function Footer() {
 
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-steel-bright">
-            Machines
+            Agadir & stock
           </p>
           <ul className="mt-4 space-y-2 text-sm text-ink">
             <li>
+              <Link href="/chariot-elevateur-agadir" className="cta-underline">
+                Chariot élévateur Agadir
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/location-chariot-elevateur-agadir"
+                className="cta-underline"
+              >
+                Location chariot Agadir
+              </Link>
+            </li>
+            <li>
               <Link href="/stock/linde-e20" className="cta-underline">
-                LINDE E20
+                LINDE E20 électrique
               </Link>
             </li>
             <li>
