@@ -12,8 +12,8 @@ import {
 } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: `Contactez ${company.legalName} à Agadir — WhatsApp ${company.whatsappDisplay}, tél ${company.telDisplay}, ${company.email}. Devis achat, location ou option d’achat.`,
+  title: "Contact chariot élévateur Agadir",
+  description: `Contactez ${company.legalName} à Agadir pour un chariot élévateur — WhatsApp ${company.whatsappDisplay}, tél ${company.telDisplay}, ${company.email}. Devis achat, location ou option d’achat.`,
   alternates: { canonical: "/contact" },
 };
 

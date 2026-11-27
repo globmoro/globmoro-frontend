@@ -11,10 +11,15 @@ import {
 } from "@/data/machines";
 
 export const metadata: Metadata = {
-  title: "Nos machines",
+  title: "Chariots élévateurs électriques Agadir — stock",
   description:
-    "Stock GLOBMORO Agadir — LINDE E20 PHL-02 2019 et TOYOTA 7FBEST15 2015. Prix sur demande. Vente, location ou location avec option d’achat — inspection libre.",
+    "Stock chariot élévateur électrique Agadir — LINDE E20 PHL-02 2019 et TOYOTA 7FBEST15 2015. Prix sur demande. Vente, location ou option d’achat — inspection libre El Wifaq.",
   alternates: { canonical: "/stock" },
+  openGraph: {
+    title: "Stock chariots élévateurs électriques · GLOBMORO Agadir",
+    description:
+      "LINDE E20 et TOYOTA 7FBEST15 en stock à Agadir. Inspection libre. Prix / conditions sur devis.",
+  },
 };
 
 export default function StockPage() {
@@ -24,7 +29,7 @@ export default function StockPage() {
         <div className="mx-auto max-w-6xl">
           <p className="section-kicker">Nos machines</p>
           <h1 className="mt-4 max-w-3xl text-4xl md:text-5xl">
-            Deux chariots électriques disponibles à Agadir
+            Chariots élévateurs électriques disponibles à Agadir
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist-bright md:text-lg">
             Achat, location ou location avec option d’achat. {saleDisclaimer}{" "}

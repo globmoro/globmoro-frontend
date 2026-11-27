@@ -4,8 +4,8 @@ import { TrustStrip } from "@/components/TrustStrip";
 import { company, trustPoints, whatsappUrl } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "À propos",
-  description: `${company.legalName} — SARL à Agadir. Import Europe documenté de chariots élévateurs électriques d’occasion. ICE ${company.ice}, RC ${company.rc}.`,
+  title: "À propos — manutention Agadir",
+  description: `${company.legalName} — SARL manutention à Agadir. Vente et location de chariots élévateurs électriques d’occasion. ICE ${company.ice}, RC ${company.rc}.`,
   alternates: { canonical: "/a-propos" },
 };
 

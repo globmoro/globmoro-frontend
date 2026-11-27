@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { company } from "@/data/company";
 import { machines } from "@/data/machines";
+import { localLanding, locationLanding } from "@/data/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = company.siteUrl;
@@ -8,6 +9,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: `${base}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    {
+      url: `${base}${localLanding.path}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${base}${locationLanding.path}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
     { url: `${base}/stock`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     ...machines.map((machine) => ({
       url: `${base}/stock/${machine.slug}`,
